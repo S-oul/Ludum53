@@ -5,13 +5,17 @@ using UnityEngine;
 public class Lever : MonoBehaviour
 {
     bool _isOn = false;
-    
+
+    public int Maxangle = 180;
+    public int MinAngle = -67;
+    public List<GameObject> Lights;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
-    public void Switch()
+    public bool Switch()
     {
         switch (_isOn)
         {
@@ -24,10 +28,51 @@ public class Lever : MonoBehaviour
                 _isOn = true;
                 break;
         }
+        return _isOn;
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if(_isOn)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                foreach (GameObject obj in Lights)
+                {
+                    float angle = obj.transform.eulerAngles.z;
+                    if (angle > Maxangle+20f) { angle -= 360; }
+                    if (angle < Maxangle)
+                    {
+                        obj.transform.eulerAngles += new Vector3(0, 0, 1);
+                        print(angle);
+
+                    }
+                    else
+                    {
+                        obj.transform.eulerAngles = new Vector3(0, 0, Maxangle);
+                    }
+
+                }
+            }
+            if(Input.GetKey(KeyCode.Q)) 
+            {
+                foreach (GameObject obj in Lights)
+                {
+                    float angle = obj.transform.eulerAngles.z;
+                    if (angle > Maxangle) { angle -= 360;}
+                    if (angle > MinAngle)
+                    {
+                        print(angle);
+                        obj.transform.eulerAngles += new Vector3(0, 0, -1);
+                    }
+                    else
+                    {
+                        obj.transform.eulerAngles = new Vector3(0, 0, MinAngle);
+                    }
+
+                }
+            }
+
+        }
     }
 }

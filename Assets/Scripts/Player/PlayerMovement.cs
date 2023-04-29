@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.SearchService;
 using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     #endregion
 
+    private Lever _lever;
+    private bool _isLevering;
+
     private bool _asCrate = false;
     private Crate _crate;
 
@@ -30,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!_isLevering)
+        {
+            #region Movement
         if (Input.GetKey(KeyCode.D))
         {
             _isLeft = false;
@@ -48,9 +55,21 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = Vector2.up * _jumpForce;
         }
+        #endregion
+        }
+        else
+        {
+
+        }
 
         if (Input.GetKeyDown(KeyCode.F)) 
         {
+            if (_isLevering)
+            {
+                _isLevering = false;
+                _lever.Switch();
+                return;
+            }
             if (!_asCrate)
             {
                 RaycastHit2D hit = Raycaster();
@@ -60,7 +79,9 @@ public class PlayerMovement : MonoBehaviour
                     switch (hit.transform.tag)
                     {
                         case "Lever":
-                            hit.transform.GetComponent<Lever>().Switch();
+                            if (_lever == null){_lever = hit.transform.GetComponent<Lever>();}
+                            _isLevering = _lever.Switch();
+                            print(_isLevering);
                             break;
                         case "Crate":
                             _crate = hit.transform.GetComponent<Crate>();
@@ -68,11 +89,7 @@ public class PlayerMovement : MonoBehaviour
                             _asCrate = true;
                             break;
                     }
-                }
-                else
-                {
-                    Debug.Log("problem");
-                    
+                    print('h');
                 }
             }
             else
