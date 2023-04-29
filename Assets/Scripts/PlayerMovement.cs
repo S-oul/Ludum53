@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyUp(inputs.keyCode))
             {
-                Debug.Log(inputs.keyCode.ToString() + " // " + inputs.maps.ToString() + " Unpressed");
+                //Debug.Log(inputs.keyCode.ToString() + " // " + inputs.maps.ToString() + " Unpressed");
 
                 if (inputs.maps == Maps.LShift)
                 {
@@ -71,27 +71,27 @@ public class PlayerMovement : MonoBehaviour
                     case Maps.Up:
                         DoMove(DIR.UP);
                         break;
-
                     case Maps.Down:
                         DoMove(DIR.DOWN);
                         break;
-
                     case Maps.Left:
                         DoMove(DIR.LEFT);
                         break;
-
                     case Maps.Right:
                         DoMove(DIR.RIGHT);
                         break;
-
                     case Maps.LShift:
                         _isSneaking = true;
                         break;
-
                     case Maps.LControl:
                         _isRunning = true;
                         break;
-
+                    case Maps.Fire0:
+                        _isRunning = true;
+                        break;
+                    case Maps.Fire1:
+                        _isRunning = true;
+                        break;
                 }
             }
         }
