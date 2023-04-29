@@ -242,7 +242,7 @@ Transform:
   m_Children:
   - {fileID: 1869271677378488175}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &8145914977355001485
 Rigidbody2D:
@@ -270,7 +270,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 2
+  m_Constraints: 6
 --- !u!235 &3974805082309909859
 WheelJoint2D:
   m_ObjectHideFlags: 0

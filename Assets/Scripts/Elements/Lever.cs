@@ -11,7 +11,7 @@ public class Lever : MonoBehaviour
     {
         
     }
-    void Switch()
+    public void Switch()
     {
         switch (_isOn)
         {
