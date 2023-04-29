@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,7 +8,7 @@ public class Enemy : MonoBehaviour
     [Space]
     [SerializeField] GameObject _ship;
     Rigidbody2D _rb;
-    LineRenderer _lr;
+    TrailRenderer _lr;
     [Space] 
     [Header("Modifiers")]
     [Space]
@@ -19,13 +20,17 @@ public class Enemy : MonoBehaviour
     Vector3 _Dir;
     Vector3 _attackhereBounds;
     Vector3 _attackhereShip;
-    bool _haspoint;
+    bool _goingto;
 
     //LIFE DASH TRAIL ELSE;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _lr = GetComponent<TrailRenderer>();
+        _lr.widthCurve = _linethick;
+
+
 
         _attackhereBounds = CreateAttackPoint();
     }
@@ -35,8 +40,8 @@ public class Enemy : MonoBehaviour
         float x = Random.Range(-7.5f,7.5f);
         float y = Random.Range(-.1625f, .1625f);
         print(x + " // " + y);
-        _haspoint = true;
-        Vector3 pos = new Vector3(x,y);
+        _goingto = true;
+        Vector3 pos = new(x,y);
         return pos;
     }
         
@@ -44,15 +49,30 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         //print(_ship.transform.position);
-        _attackhereShip = _attackhereBounds + _ship.transform.position;
-        _Dir = (_attackhereShip - transform.position).normalized;
-        _rb.velocity = _speed * Time.deltaTime * _Dir;
-        Debug.DrawLine(transform.position, _attackhereShip, Color.green);
-        
-        float dist = Vector3.Distance(transform.position,_attackhereShip);
-        if(dist <= .7f)
+        if( _goingto )
         {
-            print("Arrived");
+
+            _attackhereShip = _attackhereBounds + _ship.transform.position;
+            _Dir = (_attackhereShip - transform.position).normalized;
+            _rb.velocity = _speed * Time.deltaTime * _Dir;
+        
+            if(Mathf.Abs(_rb.velocity.x) > Mathf.Abs(_rb.velocity.y))
+            {
+                transform.position += new Vector3(0, Mathf.Sin(Time.time * 2f) * .01f);
+            }
+        
+
+            Debug.DrawLine(transform.position, _attackhereShip, Color.green);
+        
+
+            float dist = Vector3.Distance(transform.position,_attackhereShip);
+            if(dist <= .8f)
+            {
+                print("Arrived");
+                _goingto = false;
+            }
+
         }
     }
+
 }

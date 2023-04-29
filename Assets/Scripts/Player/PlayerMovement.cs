@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 5;
 
 
+    
+
     private bool _isLeft;
     private Rigidbody2D _rb;
     #endregion
@@ -40,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _cam = Camera.main;
     }
 
     void Update()
@@ -78,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 _isLevering = false;
                 _lever.Switch();
+                _cam.GetComponent<CameraZoom>().NewSize(5f);
                 return;
             }
             if (!_asCrate)
@@ -91,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
                         case "Lever":
                             if (_lever == null){_lever = hit.collider.GetComponent<Lever>();}
                             _isLevering = _lever.Switch();
+                            _cam.GetComponent<CameraZoom>().NewSize(7.5f);
                             print(_isLevering);
                             break;
                         case "Crate":
