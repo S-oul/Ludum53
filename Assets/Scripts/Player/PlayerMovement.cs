@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor.SearchService;
-using UnityEditor.ShaderGraph.Drawing;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class PlayerMovement : MonoBehaviour
 {
+    #region REF
+    [Header("              Ref")]
+    [Space]
+
+    [SerializeField] Camera _cam; 
     [SerializeField] Transform _interactPos;
 
+    #endregion
+    [Space]
     #region MOVEMENT
+    [Header("            Modifiers")]
+    [Space]
     [SerializeField] private float _walkSpeed = 10;
     [SerializeField] private float _jumpForce = 5;
 
@@ -26,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _asCrate = false;
     private Crate _crate;
+
+
+    [Space(100)]
+    [Header("Debug")]
+    public bool _debug;
 
     private void Start()
     {
@@ -76,15 +86,15 @@ public class PlayerMovement : MonoBehaviour
                 if (hit.collider != null)
                 {
                     Debug.Log(hit.transform.name);
-                    switch (hit.transform.tag)
+                    switch (hit.collider.tag)
                     {
                         case "Lever":
-                            if (_lever == null){_lever = hit.transform.GetComponent<Lever>();}
+                            if (_lever == null){_lever = hit.collider.GetComponent<Lever>();}
                             _isLevering = _lever.Switch();
                             print(_isLevering);
                             break;
                         case "Crate":
-                            _crate = hit.transform.GetComponent<Crate>();
+                            _crate = hit.collider.GetComponent<Crate>();
                             _crate.interact(_interactPos);
                             _asCrate = true;
                             break;
@@ -102,6 +112,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         #region Debug
+        if (_debug)
+        {
+            if (!_isLeft)
+            {
+                Debug.DrawRay(_interactPos.position, Vector2.right, Color.red);
+            }
+            else
+            {
+                Debug.DrawRay(_interactPos.position, Vector2.left, Color.red);
+            }
+
+        }
+
         if (Input.GetKey(KeyCode.P))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -115,12 +138,10 @@ public class PlayerMovement : MonoBehaviour
         if (!_isLeft)
         {
             hit = Physics2D.Raycast(_interactPos.position, Vector2.right, 1);
-            Debug.DrawRay(_interactPos.position, Vector2.right, Color.red);
         }
         else
         {
             hit = Physics2D.Raycast(_interactPos.position, Vector2.left,1);
-            Debug.DrawRay(_interactPos.position, Vector2.left, Color.red);
         }
         return hit;
     }
