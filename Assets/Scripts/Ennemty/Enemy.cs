@@ -50,8 +50,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _lr = GetComponent<TrailRenderer>();
-        _lr.widthCurve = _linethick;
+        /*_lr = GetComponent<TrailRenderer>();
+        _lr.widthCurve = _linethick;*/
 
         _boxShip = _ship.transform.GetChild(0).GetComponent<BoxCollider2D>();
 
