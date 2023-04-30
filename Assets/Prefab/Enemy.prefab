@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3308260133733043420
 SpriteRenderer:
@@ -102,13 +102,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ship: {fileID: 0}
+  _hp: 1
   _speed: 30
+  _crawlingSpeed: 20
+  _attackPlayerSpeed: 35
+  _speedlightMultiplier: 1
   _linethick:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.16981888
       inSlope: -0.05923305
       outSlope: -0.05923305
       tangentMode: 0
@@ -118,15 +122,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -1.9770383
-      outSlope: -1.9770383
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.13838118
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _goingto: 0
+  _followpath: 0
+  _goPlayer: 0
 --- !u!58 &7185833936078309202
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -156,7 +163,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -219,7 +226,7 @@ MonoBehaviour:
   - {x: -0.04572296, y: -0.4902419, z: 0}
   m_ShapePathHash: -1299836787
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1350
+  m_InstanceId: -1328
   m_LocalBounds:
     m_Center: {x: -0.0035805702, y: 0.012661815, z: 0}
     m_Extent: {x: 0.4972844, y: 0.5029037, z: 0}
@@ -265,8 +272,8 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
-  m_PreviewTimeScale: 0
+  m_Time: 0.2
+  m_PreviewTimeScale: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -275,7 +282,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.16326523
+        value: 0.25
         inSlope: 0
         outSlope: 0
         tangentMode: 0
