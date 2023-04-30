@@ -67,8 +67,24 @@ public class Enemy : MonoBehaviour
         Vector3 pos = new(x,y);
         return pos;
     }
-        
+
     // Update is called once per frame
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("lightMask"))
+        {
+            //print("j'y suis"); 
+            _speedlightMultiplier = .25f;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("lightMask"))
+        {
+            //print("j'y fut");
+            _speedlightMultiplier = 1;
+        }
+    }
     void Update()
     {
         //print(_ship.transform.position);
@@ -77,11 +93,6 @@ public class Enemy : MonoBehaviour
             _attackhereShip = _attackhereBounds + _ship.transform.position;
             _Dir = (_attackhereShip - transform.position).normalized;
             _rb.velocity = _speed * Time.deltaTime * _speedlightMultiplier * _Dir;
-        
-            if(Mathf.Abs(_rb.velocity.x) > Mathf.Abs(_rb.velocity.y))
-            {
-                transform.position += new Vector3(0, Mathf.Sin(Time.time * 2f) * .01f);
-            }
         
 
             Debug.DrawLine(transform.position, _attackhereShip, Color.green);
@@ -105,7 +116,7 @@ public class Enemy : MonoBehaviour
             if (transform.localPosition.x <= _boxShip.bounds.center.x)
             {
                 _Dir = new Vector3(-_boxShip.bounds.extents.x - transform.position.x, _boxShip.bounds.extents.y - 1 - transform.position.y);
-                _rb.velocity = _crawlingSpeed * Time.deltaTime * _Dir.normalized;
+                _rb.velocity = _crawlingSpeed * Time.deltaTime * _speedlightMultiplier * _Dir.normalized;
                 Debug.DrawRay(transform.position, _Dir, Color.yellow);
                 Dist = Vector2.Distance(transform.position, new Vector2(-_boxShip.bounds.extents.x, _boxShip.bounds.extents.y - 1));
 
@@ -113,7 +124,7 @@ public class Enemy : MonoBehaviour
             if (transform.localPosition.x >= _boxShip.bounds.center.x)
             {
                 _Dir = new Vector3(_boxShip.bounds.extents.x - transform.position.x, _boxShip.bounds.extents.y - 1 - transform.position.y).normalized;
-                _rb.velocity = _crawlingSpeed * Time.deltaTime * _Dir;
+                _rb.velocity = _crawlingSpeed * Time.deltaTime * _speedlightMultiplier * _Dir;
                 Debug.DrawRay(transform.position, _Dir, Color.yellow);
                 Dist = Vector2.Distance(transform.position, new Vector2(_boxShip.bounds.extents.x, _boxShip.bounds.extents.y - 1));
 
@@ -144,7 +155,7 @@ public class Enemy : MonoBehaviour
         if (_goUp)
         {
             _Dir = Vector2.up;
-            _rb.velocity = Time.deltaTime * _speed * _Dir;
+            _rb.velocity = Time.deltaTime * _speed * _speedlightMultiplier * _Dir;
             _goUpTime -= Time.deltaTime;
             if( _goUpTime < 0)
             {

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
 {
-    public bool goUp;
-    public bool goDown;
+    [SerializeField] bool goUp;
+    [SerializeField] bool goDown;
 
     [SerializeField] private float _newSize;
     [SerializeField] private float _ZoomSpeed = 10;

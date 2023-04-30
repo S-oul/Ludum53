@@ -1,13 +1,16 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
     bool _isOn = false;
 
-    public int Maxangle = 180;
-    public int MinAngle = -67;
+    [SerializeField] int Maxangle = 180;
+    [SerializeField] int MinAngle = -67;
+    public Collider2D _col;
     public List<GameObject> Lights;
 
     // Start is called before the first frame update
@@ -30,9 +33,13 @@ public class Lever : MonoBehaviour
         }
         return _isOn;
     }
+
+
+
     // Update is called once per frame
     void Update()
     {
+
         if(_isOn)
         {
             if (Input.GetKey(KeyCode.D))

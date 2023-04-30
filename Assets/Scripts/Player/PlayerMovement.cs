@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     #endregion
 
+    private LeverPump _pump;
     private Lever _lever;
     private bool _isLevering;
 
@@ -75,7 +77,22 @@ public class PlayerMovement : MonoBehaviour
         {
 
         }
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit2D hit = Raycaster();
+            if (hit.collider != null)
+            {
+                Debug.Log(hit.transform.name);
+                switch (hit.collider.tag)
+                {
+                    case "Crate":
+                        _crate = hit.collider.GetComponent<Crate>();
+                        _crate.interact(_interactPos);
+                        _asCrate = true;
+                        break;
+                }
+            }
+        }
         if (Input.GetKeyDown(KeyCode.F)) 
         {
             if (_isLevering)
@@ -93,19 +110,19 @@ public class PlayerMovement : MonoBehaviour
                     Debug.Log(hit.transform.name);
                     switch (hit.collider.tag)
                     {
+                        case "Pump":
+                            if (_pump == null) { _pump = hit.collider.GetComponent<LeverPump>(); }
+                            _isLevering = _pump.Switch();
+                            _cam.GetComponent<CameraZoom>().NewSize(2.5f);
+                            print(_isLevering);
+                            break;
                         case "Lever":
                             if (_lever == null){_lever = hit.collider.GetComponent<Lever>();}
                             _isLevering = _lever.Switch();
                             _cam.GetComponent<CameraZoom>().NewSize(7.5f);
                             print(_isLevering);
                             break;
-                        case "Crate":
-                            _crate = hit.collider.GetComponent<Crate>();
-                            _crate.interact(_interactPos);
-                            _asCrate = true;
-                            break;
                     }
-                    print('h');
                 }
             }
             else

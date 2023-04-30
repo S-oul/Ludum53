@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3931840191761381894}
   - component: {fileID: 6302502878259938334}
   - component: {fileID: 8922519564699119615}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -102,10 +102,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ship: {fileID: 0}
+  _player: {fileID: 0}
   _hp: 1
   _speed: 30
   _crawlingSpeed: 20
-  _attackPlayerSpeed: 35
+  _attackPlayerSpeed: 45
   _speedlightMultiplier: 1
   _linethick:
     serializedVersion: 2
@@ -133,6 +134,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _goingto: 0
   _followpath: 0
+  _goUp: 0
   _goPlayer: 0
 --- !u!58 &7185833936078309202
 CircleCollider2D:
