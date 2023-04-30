@@ -5,34 +5,35 @@ using UnityEngine;
 
 public class LeverPump : MonoBehaviour
 {
-    [ReadOnly] float _charge;
+    [SerializeField] [ReadOnly] float _charge;
     [SerializeField] float _speedCharge;
 
     [SerializeField] float _timeBetweenPump;
 
-    [SerializeField] bool _isOn = false;
-    [SerializeField] bool _isOk = false;
+    bool _isOn = false;
+    bool _isOk = true;
 
-    KeyCode _oldkey;
+    KeyCode _oldkey = KeyCode.S;
     public bool Switch()
     {
         switch (_isOn)
         {
             case true:
-                transform.eulerAngles = new Vector3(0, 0, 30);
                 _isOn = false;
                 break;
             case false:
-                transform.eulerAngles = new Vector3(0, 0, -30);
                 _isOn = true;
                 break;
         }
+        print(_isOn);
         return _isOn;
     }
 
     IEnumerator waitin(float time)
     {
         yield return new WaitForSeconds(time);
+        _isOk = true;
+
     }
 
     void Start()
@@ -43,25 +44,24 @@ public class LeverPump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W)) 
+        if(Input.GetKeyDown(KeyCode.W) && _isOn) 
         {
-            if(_oldkey != KeyCode.W && _isOk)
+            if(_oldkey != KeyCode.W && _isOk )
             {
-                //do
+                _isOk = false;
                 StartCoroutine(waitin(_timeBetweenPump));
+                transform.position -= Vector3.up * .2f;
                 _oldkey = KeyCode.W;
-                print("W");
             }
         }
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.S) && _isOn)
         {
-            if(_oldkey != KeyCode.Z) 
+            if(_oldkey != KeyCode.S && _isOk) 
             {
-                //do
+                _isOk = false;
                 StartCoroutine(waitin(_timeBetweenPump));
-                _oldkey = KeyCode.Z;
-                print("Z");
-
+                transform.position += Vector3.up * .2f;
+                _oldkey = KeyCode.S;
             }
         }
 

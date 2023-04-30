@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     private LeverPump _pump;
+    private bool _isPumping;
+
     private Lever _lever;
     private bool _isLevering;
 
@@ -50,58 +52,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!_isLevering)
+        if (!_isLevering && !_isPumping)
         {
-            #region Movement
-        if (Input.GetKey(KeyCode.D))
-        {
-            _isLeft = false;
-            transform.localScale = Vector3.one;
-            transform.GetChild(0).transform.localScale = new Vector3(.3f,.3f,.3f);
-            transform.position += Vector3.right * _walkSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            _isLeft = true;
-            transform.localScale = new Vector3(-1,1,1);
-            transform.GetChild(0).transform.localScale = new Vector3(-.3f, .3f, .3f);
-            transform.position += Vector3.left * _walkSpeed * Time.deltaTime;
-        }
-        if(Input.GetKey(KeyCode.Space) && transform.parent != null) 
-        {
-            _rb.velocity = Vector2.up * _jumpForce;
-        }
+        #region Movement
+            if (Input.GetKey(KeyCode.D))
+            {
+                _isLeft = false;
+                transform.localScale = Vector3.one;
+                transform.GetChild(0).transform.localScale = new Vector3(.3f,.3f,.3f);
+                transform.position += Vector3.right * _walkSpeed * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                _isLeft = true;
+                transform.localScale = new Vector3(-1,1,1);
+                transform.GetChild(0).transform.localScale = new Vector3(-.3f, .3f, .3f);
+                transform.position += Vector3.left * _walkSpeed * Time.deltaTime;
+            }
+            if(Input.GetKey(KeyCode.Space) && transform.parent != null) 
+            {
+                _rb.velocity = Vector2.up * _jumpForce;
+            }
         #endregion
         }
-        else
-        {
 
-        }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            RaycastHit2D hit = Raycaster();
-            if (hit.collider != null)
-            {
-                Debug.Log(hit.transform.name);
-                switch (hit.collider.tag)
-                {
-                    case "Crate":
-                        _crate = hit.collider.GetComponent<Crate>();
-                        _crate.interact(_interactPos);
-                        _asCrate = true;
-                        break;
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.F)) 
-        {
-            if (_isLevering)
-            {
-                _isLevering = false;
-                _lever.Switch();
-                _cam.GetComponent<CameraZoom>().NewSize(5f);
-                return;
-            }
             if (!_asCrate)
             {
                 RaycastHit2D hit = Raycaster();
@@ -110,17 +86,10 @@ public class PlayerMovement : MonoBehaviour
                     Debug.Log(hit.transform.name);
                     switch (hit.collider.tag)
                     {
-                        case "Pump":
-                            if (_pump == null) { _pump = hit.collider.GetComponent<LeverPump>(); }
-                            _isLevering = _pump.Switch();
-                            _cam.GetComponent<CameraZoom>().NewSize(2.5f);
-                            print(_isLevering);
-                            break;
-                        case "Lever":
-                            if (_lever == null){_lever = hit.collider.GetComponent<Lever>();}
-                            _isLevering = _lever.Switch();
-                            _cam.GetComponent<CameraZoom>().NewSize(7.5f);
-                            print(_isLevering);
+                        case "Crate":
+                            _crate = hit.collider.GetComponent<Crate>();
+                            _crate.interact(_interactPos);
+                            _asCrate = true;
                             break;
                     }
                 }
@@ -131,7 +100,43 @@ public class PlayerMovement : MonoBehaviour
                 _asCrate = false;
                 _crate = null;
             }
-
+            
+        }
+        if (Input.GetKeyDown(KeyCode.F)) 
+        {
+            if (_isLevering)
+            {
+                _isLevering = false;
+                _lever.Switch();
+                _cam.GetComponent<CameraZoom>().NewSize(5f);
+                return;
+            }else if (_isPumping)
+            {
+                _isPumping = false;
+                _pump.Switch();
+                _cam.GetComponent<CameraZoom>().NewSize(5f);
+            }
+            else if(!_asCrate)
+            {
+                RaycastHit2D hit = Raycaster();
+                if (hit.collider != null)
+                {
+                    Debug.Log(hit.transform.name);
+                    switch (hit.collider.tag)
+                    {
+                        case "Pump":
+                            if (_pump == null) { _pump = hit.collider.GetComponent<LeverPump>(); }
+                            _isPumping = _pump.Switch();
+                            _cam.GetComponent<CameraZoom>().NewSize(2.5f);
+                            break;
+                        case "Lever":
+                            if (_lever == null) { _lever = hit.collider.GetComponent<Lever>(); }
+                            _isLevering = _lever.Switch();
+                            _cam.GetComponent<CameraZoom>().NewSize(7.5f);
+                            break;
+                    }
+                }
+            }
         }
 
         #region Debug

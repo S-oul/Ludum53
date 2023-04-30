@@ -13,12 +13,7 @@ public class ZipLine : MonoBehaviour
     void Start()
     {
         _lr = GetComponent<LineRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _lr.SetPosition(0,_start.position);
-        _lr.SetPosition(1,_end.position);
+        _lr.SetPosition(0, _start.position);
+        _lr.SetPosition(1, _end.position);
     }
 }

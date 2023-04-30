@@ -16,6 +16,11 @@ public class Plateform : MonoBehaviour
         if(!collision.transform.CompareTag("Enemy"))
         collision.transform.parent = transform;
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!collision.transform.CompareTag("Enemy") && collision.transform.parent != transform)
+            collision.transform.parent = transform;
+    }
     private void OnCollisionExit2D(Collision2D collision)
     {
         collision.transform.parent = null;
