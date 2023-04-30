@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] Camera _cam; 
     [SerializeField] Transform _interactPos;
+    [SerializeField] Transform _visorpos;
 
     #endregion
     [Space]
@@ -22,9 +23,14 @@ public class PlayerMovement : MonoBehaviour
     [Space]
     [SerializeField] private float _walkSpeed = 10;
     [SerializeField] private float _jumpForce = 5;
+    [Tooltip("En FRAME")]
+    [SerializeField] float _timeToShoot = 15;
+    [SerializeField] float _shootDist = 2;
 
+    float _shootTime = 0;
 
     
+
 
     private bool _isLeft;
     private Rigidbody2D _rb;
@@ -48,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _cam = Camera.main;
+
+
+        _shootTime = _timeToShoot;
     }
 
     void Update()
@@ -139,6 +148,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButton(0))
+        {
+            Debug.DrawRay(transform.position, (_visorpos.position - transform.position ).normalized* _shootDist, Color.magenta);
+
+            _shootTime -= 1;
+            if(_shootTime < 1)
+            {
+                Shoot();
+                _shootTime = _timeToShoot;
+            }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _shootTime = _timeToShoot;
+        }
+
         #region Debug
         if (_debug)
         {
@@ -158,6 +183,21 @@ public class PlayerMovement : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         #endregion
+    }
+
+    void Shoot()
+    {
+        RaycastHit2D hit;
+        hit = Physics2D.Raycast(transform.position, (_visorpos.position - transform.position ).normalized, _shootDist, 8);
+        if (hit.collider == null)
+        {
+
+            print("caca");
+        }
+        else
+        {
+            print(hit.collider.gameObject.name);
+        }
     }
 
     private RaycastHit2D Raycaster()
