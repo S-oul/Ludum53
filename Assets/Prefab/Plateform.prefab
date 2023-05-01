@@ -99,10 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charge: 0
-  _speedCharge: 0
-  _timeBetweenPump: 0
-  _isOn: 0
-  _isOk: 0
+  _depletionFactor: 2
+  _addToCharge: 0.05
+  _timeBetweenPump: 0.05
 --- !u!61 &7735020379498252045
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -403,13 +402,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2340101157926349508}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 982cc61cd76d27a41b9f9d6c12a5feb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _posPercent: 0
+  _speed: 2
   _start: {fileID: 0}
+  _oldPos: {fileID: 0}
   _end: {fileID: 0}
 --- !u!50 &8145914977355001485
 Rigidbody2D:
@@ -437,7 +438,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!233 &8490815179534468935
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -585,7 +586,7 @@ GameObject:
   - component: {fileID: 2292759902736192203}
   - component: {fileID: 2722379817283841869}
   - component: {fileID: 7701798310902933481}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: Sprite Mask
   m_TagString: lightMask
   m_Icon: {fileID: 0}
@@ -895,7 +896,7 @@ DistanceJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: -7, y: -3}
-  m_AutoConfigureDistance: 1
+  m_AutoConfigureDistance: 0
   m_Distance: 2.1600924
   m_MaxDistanceOnly: 1
 --- !u!1 &7342393008733151878
@@ -1235,7 +1236,7 @@ DistanceJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 7, y: -3}
-  m_AutoConfigureDistance: 1
+  m_AutoConfigureDistance: 0
   m_Distance: 2.1599998
   m_MaxDistanceOnly: 1
 --- !u!1 &9000679926673956796

@@ -16,9 +16,11 @@ public class Visor : MonoBehaviour
     void Update()
     {
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position += new Vector3(0, 0, 20);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
         transform.eulerAngles += new Vector3(0, 0, 1) * _rotateSpeed * Time.deltaTime;
+       /* Vector3 size = new Vector3(.3f, .3f, 1);
+        transform.localScale = new Vector3(Mathf.Sin(Time.time) * size.x/3+ .15f, Mathf.Sin(Time.time) * size.y /3 + .15f);*/
 
     }
 }

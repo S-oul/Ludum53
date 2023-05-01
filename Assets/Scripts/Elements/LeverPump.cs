@@ -6,7 +6,9 @@ using UnityEngine;
 public class LeverPump : MonoBehaviour
 {
     [SerializeField] [ReadOnly] float _charge;
-    [SerializeField] float _speedCharge;
+    [SerializeField] float _depletionFactor = 2f;
+    [SerializeField] float _addToCharge;
+
 
     [SerializeField] float _timeBetweenPump;
 
@@ -14,6 +16,12 @@ public class LeverPump : MonoBehaviour
     bool _isOk = true;
 
     KeyCode _oldkey = KeyCode.S;
+
+    public float Charge
+    {
+        get => _charge;
+    }
+
     public bool Switch()
     {
         switch (_isOn)
@@ -40,7 +48,13 @@ public class LeverPump : MonoBehaviour
     {
         
     }
+    void AddCharge(float toAdd)
+    {
+        _charge += toAdd;
+        if(_charge < 0) { _charge = 0; }
+        if(_charge > 1) { _charge = 1; }
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -52,6 +66,8 @@ public class LeverPump : MonoBehaviour
                 StartCoroutine(waitin(_timeBetweenPump));
                 transform.position -= Vector3.up * .2f;
                 _oldkey = KeyCode.W;
+
+                AddCharge(_addToCharge);
             }
         }
         if (Input.GetKeyDown(KeyCode.S) && _isOn)
@@ -62,8 +78,10 @@ public class LeverPump : MonoBehaviour
                 StartCoroutine(waitin(_timeBetweenPump));
                 transform.position += Vector3.up * .2f;
                 _oldkey = KeyCode.S;
+                
+                AddCharge(_addToCharge);
             }
         }
-
+        AddCharge(-Time.deltaTime/100 * _depletionFactor);
     }
 }
