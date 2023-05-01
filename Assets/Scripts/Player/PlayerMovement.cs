@@ -27,7 +27,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float _timeToShoot = 15;
     [SerializeField] float _shootDist = 2;
     [SerializeField] float _reloadTime = 4;
-
+    [SerializeField] int _bulletCount = 0;
+    public bool CanShoot = false;
     float _shootTime = 0;
 
 
@@ -51,6 +52,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Debug")]
     public bool _debug;
 
+    [HideInInspector]public bool IsReloading { get => _isReloading;}
+    public float ReloadTime { get => _reloadTime;}
+    public int BulletCount { get => _bulletCount; set => _bulletCount = value; }
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -70,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
                 _isLeft = false;
                 transform.localScale = Vector3.one;
                 transform.GetChild(0).transform.localScale = new Vector3(.3f,.3f,.3f);
+                _cam.transform.localScale = Vector3.one;
                 transform.position += Vector3.right * _walkSpeed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.Q))
@@ -78,8 +84,9 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = new Vector3(-1,1,1);
                 transform.GetChild(0).transform.localScale = new Vector3(-.3f, .3f, .3f);
                 transform.position += Vector3.left * _walkSpeed * Time.deltaTime;
+                _cam.transform.localScale = new Vector3(-1,1,1);
             }
-            if(Input.GetKey(KeyCode.Space) && transform.parent != null) 
+            if (Input.GetKey(KeyCode.Space) && transform.parent != null) 
             {
                 _rb.velocity = Vector2.up * _jumpForce;
             }
@@ -149,18 +156,31 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(0) && _isReloading == false)
+        if (Input.GetMouseButton(0) && _isReloading == false && CanShoot)
         {
             //Debug.DrawRay(transform.position, (_visorpos.position - _interactPos.position).normalized * _shootDist, Color.magenta);
 
             _shootTime -= 1;
-            _cam.GetComponent<CameraZoom>().NewSize(_cam.orthographicSize - .025f);
+            _cam.GetComponent<CameraZoom>().NewSize(_cam.orthographicSize - .015f);
 
-            if (_shootTime < 1)
+            if (_shootTime == 0)
             {
-                Shoot();
+                if(_bulletCount > 0)
+                {
+                    Shoot();
+                    print(_bulletCount);
+                    //PLAYSOUND HERE
+                    _bulletCount--;
+
+                }
+                else
+                {
+                    //PLAYSOUND HERE
+                }
+
                 _cam.GetComponent<CameraZoom>().NewSize(5f);
                 _shootTime = _timeToShoot;
+
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -194,7 +214,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _isReloading = true;
         StartCoroutine(Reload(_reloadTime));
-        print("Shooting");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (_visorpos.position - _interactPos.position).normalized,_shootDist);
         if(hit.collider != null)
         {
