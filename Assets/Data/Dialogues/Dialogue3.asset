@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a764a587442434591d3aae3fda2e5f, type: 3}
+  m_Name: Dialogue3
+  m_EditorClassIdentifier: 
+  lineDelay: 0.5
+  charDelay: 0.03
+  pitchRange: {x: 0.9, y: 1.1}
+  lines:
+  - "Finally ! Goddamn. Been waiting those for a while. It\u2019s been a month since
+    the last porter left the refuge."
+  - ...
+  - "Ah, I see who you are. Everybody heard from you. Well, the man you\u2019re looking
+    for is one station away, at Highland Crossroads. He\u2019s the radio man now.
+    Unfortunately, our radio broke 2 days ago, and the cable to there as fallen into
+    the mist. "
+  - "You\u2019re sure you want to get there ?"
+  - "Alrigh, here\u2019s some more bullets. Be careful to not topple over."
+  portrait: {fileID: 0}
