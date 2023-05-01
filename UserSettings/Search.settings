@@ -13,6 +13,9 @@ scopes = {
 	"last_search.768FEAAC" = ""
 	"OpenInspectorPreview.768FEAAC" = "0"
 	"currentGroup.768FEAAC" = "all"
+	"last_search.310DEAF1" = "visual effect"
+	"OpenInspectorPreview.310DEAF1" = "0"
+	"currentGroup.310DEAF1" = "menu"
 }
 providers = {
 	adb = {
