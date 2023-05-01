@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a349a98c1157f848b37d6f002b986f1
+guid: 55f8e87b8e23b8c47897ded7d9d88e29
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -107,43 +107,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rouage_part
+      name: Pump_handle
       rect:
         serializedVersion: 2
-        x: 344
-        y: 506
-        width: 336
-        height: 336
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 282
+        y: 502
+        width: 155
+        height: 320
+      alignment: 9
+      pivot: {x: 0.51178116, y: 0.9479553}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9ec84f12f8bad543ba11ca1836749e4
-      internalID: -1994438903
+      spriteID: d1b00b2e682e4b44ab5f1696721e036c
+      internalID: -1197859822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Manche_part
+      name: Pump_basement
       rect:
         serializedVersion: 2
-        x: 283
-        y: 227
-        width: 471
-        height: 88
+        x: 558
+        y: 246
+        width: 178
+        height: 307
       alignment: 9
-      pivot: {x: 0.07619922, y: 0.5283539}
+      pivot: {x: 0.5051297, y: 0.080660746}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4faa682f495c9b647af6baa822054cb5
-      internalID: 1946277897
+      spriteID: 05767495dd1a15a4bbab959568b33ff3
+      internalID: 1744033708
       vertices: []
       indices: 
       edges: []
@@ -159,8 +159,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Manche_part: 1946277897
-      Rouage_part: -1994438903
+      Pump_basement: 1744033708
+      Pump_handle: -1197859822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
