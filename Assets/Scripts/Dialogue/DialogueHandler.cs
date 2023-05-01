@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class DialogueHandler : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private Controls controls;
     [SerializeField] private TMPro.TextMeshProUGUI display;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private List<AudioClip> charSounds;
+    private Controls controls;
     private bool progress;
 
     private void Start()
@@ -45,7 +46,7 @@ public class DialogueHandler : MonoBehaviour
                     break;
                 }
                 audioSource.pitch = Random.Range(dialogue.PitchRange.x, dialogue.PitchRange.y);
-                audioSource.Play();
+                audioSource.PlayOneShot(charSounds[Random.Range(0, charSounds.Count)]);
                 display.text += c;
                 yield return new WaitForSeconds(dialogue.CharDelay);
             }
