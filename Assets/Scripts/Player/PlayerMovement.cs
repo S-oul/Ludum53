@@ -274,11 +274,12 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit;
         if (!_isLeft)
         {
-            hit = Physics2D.Raycast(_interactPos.position, Vector2.right, 1);
+            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one, new CapsuleDirection2D(),0, Vector2.right, 3);
         }
         else
         {
-            hit = Physics2D.Raycast(_interactPos.position, Vector2.left,1);
+            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one, new CapsuleDirection2D(), 0, Vector2.left, 3);
+
         }
         return hit;
     }

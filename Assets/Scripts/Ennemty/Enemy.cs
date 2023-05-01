@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     [CurveRange(0, 0, 1, 1)]
     [SerializeField] AnimationCurve _linethick;
 
-    
+    SpriteRenderer _spriteRenderer;
 
 
     BoxCollider2D _boxShip;
@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         /*_lr = GetComponent<TrailRenderer>();
         _lr.widthCurve = _linethick;*/
-
+        _spriteRenderer = Camera.main.GetComponent<CameraZoom>()._spriteRenderer;
         _boxShip = _ship.transform.GetChild(0).GetComponent<BoxCollider2D>();
 
         _attackhereBounds = CreateAttackPoint();
@@ -178,6 +178,13 @@ public class Enemy : MonoBehaviour
         {
             _Dir = (_player.transform.position - transform.position).normalized;
             _rb.velocity = Time.deltaTime * _attackPlayerSpeed * _Dir;
+
+            float Dist = Vector2.Distance(transform.position, _player.transform.position);
+            _spriteRenderer.color = new Color(255,255,255,Dist/3);
+            if(Dist < .3f)
+            {
+                _spriteRenderer.color = new Color(0,0,0,Dist/3f);
+            }
 
         }
     }

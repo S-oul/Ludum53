@@ -9,6 +9,9 @@ public class CameraZoom : MonoBehaviour
 
     [SerializeField] private float _newSize;
     [SerializeField] private float _ZoomSpeed = 10;
+
+    public SpriteRenderer _spriteRenderer;
+
     public void Shake(float duration, float force)
     {
         StartCoroutine(shake(duration, force));
@@ -31,6 +34,10 @@ public class CameraZoom : MonoBehaviour
             yield return null;
         }
 
+    }
+    public void FadetoBlack(float percent)
+    {   
+        _spriteRenderer.color = new Color(255,255,255,percent);
     }
     public void NewSize(float Size)
     {
