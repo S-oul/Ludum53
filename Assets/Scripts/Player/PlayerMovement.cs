@@ -157,11 +157,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
-                _animator.SetTrigger("LeverPull");
+                _animator.SetTrigger("LeverRight");
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                _animator.SetTrigger("LeverPull");
+                _animator.SetTrigger("LeverLeft");
 
             }
         }
