@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using NaughtyAttributes;
 using System.Collections;
 using Unity.Burst.CompilerServices;
@@ -15,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Camera _cam; 
     [SerializeField] Transform _interactPos;
     [SerializeField] Transform _visorpos;
+    [SerializeField] Barrel _barrel;
+    [SerializeField] BulletsManager _bulletsManager;
+    [SerializeField] GameObject _bulletPrefab;
 
     #endregion
     [Space]
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float _shootDist = 2;
     [SerializeField] float _reloadTime = 4;
     [SerializeField] int _bulletCount = 0;
+    [SerializeField] int _bulletInInvetory = 3;
     public bool CanShoot = false;
     float _shootTime = 0;
 
@@ -55,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]public bool IsReloading { get => _isReloading;}
     public float ReloadTime { get => _reloadTime;}
     public int BulletCount { get => _bulletCount; set => _bulletCount = value; }
+    public int BulletInInvetory { get => _bulletInInvetory; set => _bulletInInvetory = value; }
 
     private void Start()
     {
@@ -63,11 +69,19 @@ public class PlayerMovement : MonoBehaviour
 
 
         _shootTime = _timeToShoot;
+
+        for(int i = _bulletInInvetory -1; i>= 0; i--)
+        {
+            GameObject go = Instantiate(_bulletPrefab);
+            go.transform.parent = Camera.main.transform;
+            go.transform.localPosition = new Vector3(7 - (i * .7f), -4.10f, 1);
+        }
+
     }
 
     void Update()
     {
-        if (!_isLevering && !_isPumping)
+        if (!_isLevering || !_isPumping)
         {
         #region Movement
             if (Input.GetKey(KeyCode.D))
@@ -138,10 +152,10 @@ public class PlayerMovement : MonoBehaviour
                 RaycastHit2D hit = Raycaster();
                 if (hit.collider != null)
                 {
-                    Debug.Log(hit.transform.name);
                     switch (hit.collider.tag)
                     {
                         case "Pump":
+                            Debug.Log(hit.collider.name);
                             if (_pump == null) { _pump = hit.collider.GetComponent<LeverPump>(); }
                             _isPumping = _pump.Switch();
                             _cam.GetComponent<CameraZoom>().NewSize(2.5f);
@@ -171,10 +185,23 @@ public class PlayerMovement : MonoBehaviour
                     print(_bulletCount);
                     //PLAYSOUND HERE
                     _bulletCount--;
-
+                    string str;
+                    foreach(Transform t in _barrel._holes)
+                    {
+                        //print(t.name);
+                        if (_barrel.isholed(t.name))
+                        {
+                            //print("OUI");
+                            _barrel.changeholed(t.name);
+                            t.GetComponent<SpriteRenderer>().color = Color.black;
+                            break;
+                        }
+                    }
                 }
                 else
                 {
+                    _isReloading = true;
+                    StartCoroutine(Reload(_reloadTime/2));
                     //PLAYSOUND HERE
                 }
 
