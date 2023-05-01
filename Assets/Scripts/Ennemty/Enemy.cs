@@ -1,7 +1,9 @@
 using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -20,13 +22,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _crawlingSpeed = 100;
     [SerializeField] float _attackPlayerSpeed = 250;
 
+    [SerializeField] float _timetoKill = 2;
+
     public float _speedlightMultiplier;
 
     [Space]
     [CurveRange(0, 0, 1, 1)]
     [SerializeField] AnimationCurve _linethick;
 
-    
+    SpriteRenderer _spriteRenderer;
 
 
     BoxCollider2D _boxShip;
@@ -62,7 +66,7 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         /*_lr = GetComponent<TrailRenderer>();
         _lr.widthCurve = _linethick;*/
-
+        _spriteRenderer = Camera.main.GetComponent<CameraZoom>()._spriteRenderer;
         _boxShip = _ship.transform.GetChild(0).GetComponent<BoxCollider2D>();
 
         _attackhereBounds = CreateAttackPoint();
@@ -179,7 +183,22 @@ public class Enemy : MonoBehaviour
             _Dir = (_player.transform.position - transform.position).normalized;
             _rb.velocity = Time.deltaTime * _attackPlayerSpeed * _Dir;
 
-        }
-    }
+            float Dist = Vector2.Distance(transform.position, _player.transform.position);
+            _spriteRenderer.color = new Color(0,0,0,1-Dist/3);
+            if(Dist < .3f)
+            {
+                _timetoKill -= Time.deltaTime;
+                if(_timetoKill < 0 )
+                {
+                    _spriteRenderer.color = new Color(0,0,0,1);
+                    StartCoroutine(_player.GetComponent<PlayerMovement>().PlayerDead());
+                }
+            }
+            else
+            {
 
+            }
+        }
+
+    }
 }

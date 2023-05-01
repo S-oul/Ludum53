@@ -26,4 +26,4 @@ MonoBehaviour:
     over it, all we go fine. But here\u2019s some bullets, in case if the UV lights
     are not enough."
   - And mate, be careful out there.
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: 01f01e17687b08d4cbf3b71c78dac99d, type: 3}

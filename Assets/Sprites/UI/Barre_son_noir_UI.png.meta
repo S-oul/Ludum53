@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a349a98c1157f848b37d6f002b986f1
+guid: 6ad6ff3411bcd634983032f0f7f35be0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -105,49 +105,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Rouage_part
-      rect:
-        serializedVersion: 2
-        x: 344
-        y: 506
-        width: 336
-        height: 336
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c9ec84f12f8bad543ba11ca1836749e4
-      internalID: -1994438903
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Manche_part
-      rect:
-        serializedVersion: 2
-        x: 283
-        y: 227
-        width: 471
-        height: 88
-      alignment: 9
-      pivot: {x: 0.07619922, y: 0.5283539}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4faa682f495c9b647af6baa822054cb5
-      internalID: 1946277897
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -158,9 +116,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Manche_part: 1946277897
-      Rouage_part: -1994438903
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

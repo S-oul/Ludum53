@@ -55,6 +55,7 @@ public class Bullets : MonoBehaviour
                         _player.CanShoot = true;
                         _player.BulletCount++;
                         _player.BulletInInvetory--;
+                        t.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                         t.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
                         print(t.name);
                         Destroy(gameObject);

@@ -79,7 +79,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Respawn"))
+        {
+            StartCoroutine(PlayerDead());
+        }
+    }
     void Update()
     {
         if (!_isLevering)
@@ -90,21 +96,27 @@ public class PlayerMovement : MonoBehaviour
                 if (Input.GetKey(KeyCode.D))
                 {
                     _isLeft = false;
+                    _animator.SetBool("IsWalking", true);
                     _animation.localScale = new Vector3(-1, 1, 1);
                     /*transform.localScale = Vector3.one;
                     transform.GetChild(0).transform.localScale = new Vector3(.3f, .3f, .3f);
                     _cam.transform.localScale = Vector3.one;*/
                     transform.position += Vector3.right * _walkSpeed * Time.deltaTime;
                 }
-                if (Input.GetKey(KeyCode.Q))
+                else if (Input.GetKey(KeyCode.Q))
                 {
                     _isLeft = true;
+                    _animator.SetBool("IsWalking", true);
                     _animation.localScale = new Vector3(1, 1, 1);
                     /* 
                       transform.localScale = new Vector3(-1, 1, 1);
                     transform.GetChild(0).transform.localScale = new Vector3(-.3f, .3f, .3f);
                     _cam.transform.localScale = new Vector3(-1, 1, 1);*/
                     transform.position += Vector3.left * _walkSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    _animator.SetBool("IsWalking", false);
                 }
                 if (Input.GetKey(KeyCode.Space) && transform.parent != null)
                 {
@@ -147,12 +159,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 _isLevering = false;
                 _lever.Switch();
+                _animator.SetTrigger("LeverEnter");
                 _cam.GetComponent<CameraZoom>().NewSize(5f);
                 return;
             }else if (_isPumping)
             {
                 _isPumping = false;
                 _pump.Switch();
+                _animator.SetTrigger("PumpEnter");
                 _cam.GetComponent<CameraZoom>().NewSize(5f);
             }
             else if(!_asCrate)
@@ -263,6 +277,11 @@ public class PlayerMovement : MonoBehaviour
         }
        
     }
+    public IEnumerator PlayerDead()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     IEnumerator Reload(float time)
     {
         yield return new WaitForSeconds(time);
@@ -274,11 +293,12 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit;
         if (!_isLeft)
         {
-            hit = Physics2D.Raycast(_interactPos.position, Vector2.right, 1);
+            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one, new CapsuleDirection2D(),0, Vector2.right, 3);
         }
         else
         {
-            hit = Physics2D.Raycast(_interactPos.position, Vector2.left,1);
+            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one, new CapsuleDirection2D(), 0, Vector2.left, 3);
+
         }
         return hit;
     }
