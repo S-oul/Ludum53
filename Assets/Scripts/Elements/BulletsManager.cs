@@ -27,7 +27,7 @@ public class BulletsManager : MonoBehaviour
             }
             else
             {
-                t.localPosition = new Vector3(7 - (count * .7f), -4.10f, 1);
+                t.localPosition = new Vector3(5 - (count * .7f), -4.10f, 1);
                 count++;
 
             }

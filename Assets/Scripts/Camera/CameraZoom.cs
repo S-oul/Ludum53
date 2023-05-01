@@ -37,7 +37,7 @@ public class CameraZoom : MonoBehaviour
     }
     public void FadetoBlack(float percent)
     {   
-        _spriteRenderer.color = new Color(255,255,255,percent);
+        _spriteRenderer.color = new Color(0,0,0,percent);
     }
     public void NewSize(float Size)
     {
@@ -50,6 +50,7 @@ public class CameraZoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _spriteRenderer.transform.localPosition = Vector3.zero + new Vector3(0,0,1);
         if (goUp)
         {
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, _newSize, Time.deltaTime * _ZoomSpeed);

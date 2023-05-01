@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -57,7 +58,7 @@ public class Enemy : MonoBehaviour
         {
 
 
-
+            _spriteRenderer.color = new Color(0, 0, 0, 0);
             Destroy(gameObject);
         }
     }

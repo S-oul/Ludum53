@@ -12,6 +12,8 @@ public class LeverPump : MonoBehaviour
 
     [SerializeField] float _timeBetweenPump;
 
+    public Animator _animator;
+
     bool _isOn = false;
     bool _isOk = true;
 
@@ -28,9 +30,12 @@ public class LeverPump : MonoBehaviour
         {
             case true:
                 _isOn = false;
+                _animator.SetBool("Ispumping", false);
+
                 break;
             case false:
                 _isOn = true;
+                _animator.SetBool("Ispumping", true);
                 break;
         }
         print(_isOn);
@@ -46,7 +51,7 @@ public class LeverPump : MonoBehaviour
 
     void Start()
     {
-        
+        _animator = transform.GetComponentInChildren<Animator>();
     }
     void AddCharge(float toAdd)
     {
@@ -64,7 +69,9 @@ public class LeverPump : MonoBehaviour
             {
                 _isOk = false;
                 StartCoroutine(waitin(_timeBetweenPump));
-                transform.position -= Vector3.up * .2f;
+                _animator.SetBool("Ispumping", true);
+
+                //transform.position -= Vector3.up * .2f;
                 _oldkey = KeyCode.W;
 
                 AddCharge(_addToCharge);
@@ -76,7 +83,9 @@ public class LeverPump : MonoBehaviour
             {
                 _isOk = false;
                 StartCoroutine(waitin(_timeBetweenPump));
-                transform.position += Vector3.up * .2f;
+                _animator.SetBool("Ispumping", false);
+
+                //transform.position += Vector3.up * .2f;
                 _oldkey = KeyCode.S;
                 
                 AddCharge(_addToCharge);
