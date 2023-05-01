@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 4762699511883333393}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3308260133733043420
 SpriteRenderer:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622483116718616067}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e28a58fb576d12429772c91ed88f2ce, type: 3}
   m_Name: 
@@ -228,7 +228,7 @@ MonoBehaviour:
   - {x: -0.04572296, y: -0.4902419, z: 0}
   m_ShapePathHash: -1299836787
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1378
+  m_InstanceId: 33908
   m_LocalBounds:
     m_Center: {x: -0.0035805702, y: 0.012661815, z: 0}
     m_Extent: {x: 0.4972844, y: 0.5029037, z: 0}

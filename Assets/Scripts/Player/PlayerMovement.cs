@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Barrel _barrel;
     [SerializeField] BulletsManager _bulletsManager;
     [SerializeField] GameObject _bulletPrefab;
+    [SerializeField] Transform _animation;
+
 
     #endregion
     [Space]
@@ -81,30 +83,37 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!_isLevering || !_isPumping)
+        if (!_isLevering)
         {
-        #region Movement
-            if (Input.GetKey(KeyCode.D))
+            if (!_isPumping)
             {
-                _isLeft = false;
-                transform.localScale = Vector3.one;
-                transform.GetChild(0).transform.localScale = new Vector3(.3f,.3f,.3f);
-                _cam.transform.localScale = Vector3.one;
-                transform.position += Vector3.right * _walkSpeed * Time.deltaTime;
+                #region Movement
+                if (Input.GetKey(KeyCode.D))
+                {
+                    _isLeft = false;
+                    _animation.localScale = new Vector3(-1, 1, 1);
+                    /*transform.localScale = Vector3.one;
+                    transform.GetChild(0).transform.localScale = new Vector3(.3f, .3f, .3f);
+                    _cam.transform.localScale = Vector3.one;*/
+                    transform.position += Vector3.right * _walkSpeed * Time.deltaTime;
+                }
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    _isLeft = true;
+                    _animation.localScale = new Vector3(1, 1, 1);
+                    /* 
+                      transform.localScale = new Vector3(-1, 1, 1);
+                    transform.GetChild(0).transform.localScale = new Vector3(-.3f, .3f, .3f);
+                    _cam.transform.localScale = new Vector3(-1, 1, 1);*/
+                    transform.position += Vector3.left * _walkSpeed * Time.deltaTime;
+                }
+                if (Input.GetKey(KeyCode.Space) && transform.parent != null)
+                {
+                    _rb.velocity = Vector2.up * _jumpForce;
+                }
+                #endregion
             }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                _isLeft = true;
-                transform.localScale = new Vector3(-1,1,1);
-                transform.GetChild(0).transform.localScale = new Vector3(-.3f, .3f, .3f);
-                transform.position += Vector3.left * _walkSpeed * Time.deltaTime;
-                _cam.transform.localScale = new Vector3(-1,1,1);
-            }
-            if (Input.GetKey(KeyCode.Space) && transform.parent != null) 
-            {
-                _rb.velocity = Vector2.up * _jumpForce;
-            }
-        #endregion
+
         }
 
         if (Input.GetKeyDown(KeyCode.E))
