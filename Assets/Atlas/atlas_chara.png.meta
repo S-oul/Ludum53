@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 722a87022f75fd24c91445566dbbca86
+guid: 4b31fe41cb9bbc042b607ed026432032
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -107,148 +107,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Doigt_monstre_main_droite_01
+      name: head
       rect:
         serializedVersion: 2
-        x: 139
-        y: 658
-        width: 140
-        height: 107
+        x: 70
+        y: 1856
+        width: 371
+        height: 460
       alignment: 9
-      pivot: {x: 0.7691631, y: 0.5454421}
+      pivot: {x: 0.56949216, y: 0.10300213}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d14e206edc77cd040a53b961b785498e
-      internalID: -1174993841
+      spriteID: 3f2b175e758652446847f6df78edfb9e
+      internalID: -802821175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Paume_monstre_main_droite
+      name: ponytail
       rect:
         serializedVersion: 2
-        x: 513
-        y: 690
-        width: 211
-        height: 107
+        x: 575
+        y: 2038
+        width: 213
+        height: 153
       alignment: 9
-      pivot: {x: 0.9205545, y: 0.40911636}
+      pivot: {x: 0.11670667, y: 0.7808479}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa69770ec8aafcd4fa75e4d6769f5a99
-      internalID: -477323781
+      spriteID: 5fffe2d9998d01649ac584c1ee0d7be5
+      internalID: -1621896445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bras_monstre_main_droite
+      name: torso
       rect:
         serializedVersion: 2
-        x: 675
-        y: 367
-        width: 220
-        height: 241
+        x: 912
+        y: 1741
+        width: 344
+        height: 494
       alignment: 9
-      pivot: {x: 0.08559959, y: 0.10657777}
+      pivot: {x: 0.4937549, y: 0.49130237}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ec84e9b3f074634ab74a1a383de4d04
-      internalID: 1045305470
+      spriteID: 07db582dfa0b86c4398ad55fead56494
+      internalID: 470206766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doigt_monstre_main_droite_02
+      name: left_thigh
       rect:
         serializedVersion: 2
-        x: 185
-        y: 315
-        width: 88
-        height: 134
+        x: 1429
+        y: 1761
+        width: 276
+        height: 448
       alignment: 9
-      pivot: {x: 0.51381356, y: 0.74492973}
+      pivot: {x: 0.3754529, y: 0.82610756}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88a10fd27ab3a504e91fde9e46553db1
-      internalID: -446616163
+      spriteID: ba2b3954c4578a148a4675767d9577b9
+      internalID: -1649846732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Poign\xE9e_monstre_main_droite"
+      name: left_arm
       rect:
         serializedVersion: 2
-        x: 421
-        y: 411
-        width: 116
-        height: 106
+        x: 122
+        y: 1350
+        width: 214
+        height: 376
       alignment: 9
-      pivot: {x: 0.20658559, y: 0.5000003}
+      pivot: {x: 0.6807121, y: 0.87141126}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95ece5a1199be224ab5de83bf86f963e
-      internalID: -1741912663
+      spriteID: 64765a409ae353d449167199f083b3bf
+      internalID: 192506540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doigt_monstre_main_droite_03
+      name: left_forearm
       rect:
         serializedVersion: 2
-        x: 372
-        y: 124
-        width: 90
-        height: 141
+        x: 428
+        y: 1268
+        width: 247
+        height: 488
       alignment: 9
-      pivot: {x: 0.4864936, y: 0.75863326}
+      pivot: {x: 0.6504687, y: 0.85223687}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c57b52096edc414c9b59cbb166dc345
-      internalID: -331709761
+      spriteID: ceacbda93834a35439c42091b7f13fd2
+      internalID: 1536667547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doigt_monstre_main_droite_04
+      name: right_arm
       rect:
         serializedVersion: 2
-        x: 585
-        y: 128
-        width: 88
-        height: 93
+        x: 769
+        y: 1348
+        width: 202
+        height: 301
       alignment: 9
-      pivot: {x: 0.70720047, y: 0.48692977}
+      pivot: {x: 0.3505098, y: 0.72379744}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37f18d8e6a8605a438febc6ce554a71b
-      internalID: 1256831096
+      spriteID: 3f263458c21a9964caf33678453c2656
+      internalID: -503264861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right_forearm
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 1084
+        width: 279
+        height: 551
+      alignment: 9
+      pivot: {x: 0.25023144, y: 0.87941426}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95d2abd04f2a1414490154671810abb1
+      internalID: -771491820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pelvis
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 772
+        width: 357
+        height: 379
+      alignment: 9
+      pivot: {x: 0.4544541, y: 0.7880592}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30371bb5b3434ae41b05aa6033b335b8
+      internalID: 677068554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right_leg
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 27
+        width: 344
+        height: 687
+      alignment: 9
+      pivot: {x: 0.5877824, y: 0.8719276}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24cf8821da28968418fd36662e0fcbe4
+      internalID: 1426339552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right_thigh
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 120
+        width: 280
+        height: 525
+      alignment: 9
+      pivot: {x: 0.57466346, y: 0.84953487}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 524a24ceae7c28e4981cb134132ad4dd
+      internalID: -1329388673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left_leg
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 35
+        width: 339
+        height: 725
+      alignment: 9
+      pivot: {x: 0.56852144, y: 0.8780649}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70cd750d7fa5f2047b2c1f0fb62767f4
+      internalID: 1358201828
       vertices: []
       indices: 
       edges: []
@@ -264,15 +369,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bras_monstre_main_droite: 1045305470
-      Doigt_monstre_main_droite_01: -1174993841
-      Doigt_monstre_main_droite_02: -446616163
-      Doigt_monstre_main_droite_03: -331709761
-      Doigt_monstre_main_droite_04: 1256831096
-      Monster_right_hand_parts_2: -538505315
-      Monster_right_hand_parts_4: 2090936791
-      Paume_monstre_main_droite: -477323781
-      "Poign\xE9e_monstre_main_droite": -1741912663
+      atlas_chara_10: 454078888
+      head: -802821175
+      left_arm: 192506540
+      left_forearm: 1536667547
+      left_leg: 1358201828
+      left_thigh: -1649846732
+      pelvis: 677068554
+      ponytail: -1621896445
+      right_arm: -503264861
+      right_forearm: -771491820
+      right_leg: 1426339552
+      right_thigh: -1329388673
+      torso: 470206766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
