@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] BulletsManager _bulletsManager;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _animation;
-
+    Animator _animator;
 
     #endregion
     [Space]
@@ -68,8 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _cam = Camera.main;
-
-
+        _animator = _animation.GetComponent<Animator>();
         _shootTime = _timeToShoot;
 
         for(int i = _bulletInInvetory -1; i>= 0; i--)
