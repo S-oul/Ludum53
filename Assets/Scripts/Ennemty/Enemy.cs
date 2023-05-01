@@ -191,7 +191,7 @@ public class Enemy : MonoBehaviour
                 if(_timetoKill < 0 )
                 {
                     _spriteRenderer.color = new Color(0,0,0,1);
-                    StartCoroutine(_player.PlayerDead());
+                    StartCoroutine(_player.GetComponent<PlayerMovement>().PlayerDead());
                 }
             }
             else

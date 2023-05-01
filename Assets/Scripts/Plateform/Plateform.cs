@@ -50,8 +50,6 @@ public class Plateform : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(_start.position, _end.position, _posPercent);
-        
-
 
         _joint.connectedAnchor = new Vector2(transform.position.x, transform.position.y);
     }

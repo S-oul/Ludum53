@@ -79,7 +79,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Respawn"))
+        {
+            StartCoroutine(PlayerDead());
+        }
+    }
     void Update()
     {
         if (!_isLevering)
@@ -270,6 +276,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
        
+    }
+    public IEnumerator PlayerDead()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     IEnumerator Reload(float time)
     {
