@@ -256,7 +256,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: -120}
+  m_AnchoredPosition: {x: 155, y: -120}
   m_SizeDelta: {x: 820.61, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &189349701
@@ -391,7 +391,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 65}
+  m_AnchoredPosition: {x: -300, y: 65}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &195694596
@@ -414,9 +414,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 01f01e17687b08d4cbf3b71c78dac99d, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -836,15 +836,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 189349701}
+  portraitFrame: {fileID: 0}
+  dialogueProgressSymbolAnimator: {fileID: 132175415}
+  charSoundDelay: 0.1
+  forceUpperCase: 0
   audioSource: {fileID: 969786325}
   charSounds:
   - {fileID: 8300000, guid: 5ab4ea63003a893479c63ede537cd671, type: 3}
   - {fileID: 8300000, guid: db9890808ef26af48abf585be125cb75, type: 3}
   - {fileID: 8300000, guid: 747efb5b5375a024b815795c2ed7d1e7, type: 3}
   - {fileID: 8300000, guid: 3cb238dac11e566428af322b59f0508a, type: 3}
-  charSoundDelay: 0.1
-  forceUpperCase: 0
-  dialogueProgressSymbolAnimator: {fileID: 132175415}
 --- !u!1 &1914057044
 GameObject:
   m_ObjectHideFlags: 0
