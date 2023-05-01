@@ -13,4 +13,7 @@ public class Dialogue : ScriptableObject
 
     [SerializeField] private List<string> lines;
         public List<string> Lines => lines;
+
+    [SerializeField] private Sprite portrait;
+        public Sprite Portrait => portrait; 
 }

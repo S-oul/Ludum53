@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 22b151a143c15944ebc89296713fceed
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - TT Mussels Trl
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 60b2d8c178beb27479df57705ffaa84c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

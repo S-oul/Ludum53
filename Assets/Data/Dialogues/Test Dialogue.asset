@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test Dialogue
   m_EditorClassIdentifier: 
   lineDelay: 0.5
-  charDelay: 0.05
+  charDelay: 0.03
   pitchRange: {x: 0.9, y: 1.1}
   lines:
   - According to all known laws of aviation, there is no way a bee should be able

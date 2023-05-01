@@ -7,9 +7,18 @@ using UnityEngine.SceneManagement;
 
 public class DialogueHandler : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private Controls controls;
+    [Header("Display")]
     [SerializeField] private TMPro.TextMeshProUGUI display;
+    [SerializeField] private Image portraitFrame;
+    [SerializeField] private Animator dialogueProgressSymbolAnimator;
+    [SerializeField] private float charSoundDelay;
+    [SerializeField] private bool forceUpperCase;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private List<AudioClip> charSounds;
+
+    private Controls controls;
     private bool progress;
 
     private void Start()
@@ -27,6 +36,7 @@ public class DialogueHandler : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         display.text = "";
+        if(dialogue.Portrait != null) portraitFrame.sprite = dialogue.Portrait;
         StartCoroutine(DialogueCo(dialogue));
     }
 
@@ -35,7 +45,8 @@ public class DialogueHandler : MonoBehaviour
         Queue<string> dialogueQueue = new Queue<string>(dialogue.Lines);
         while (dialogueQueue.Count > 0)
         {
-            string line = dialogueQueue.Dequeue();
+            Coroutine soundCo = StartCoroutine(SoundCo(dialogue.PitchRange));
+            string line = forceUpperCase ? dialogueQueue.Dequeue().ToUpper() : dialogueQueue.Dequeue();
             foreach (char c in line)
             {
                 if (progress) 
@@ -44,15 +55,26 @@ public class DialogueHandler : MonoBehaviour
                     progress = false;
                     break;
                 }
-                audioSource.pitch = Random.Range(dialogue.PitchRange.x, dialogue.PitchRange.y);
-                audioSource.Play();
                 display.text += c;
                 yield return new WaitForSeconds(dialogue.CharDelay);
             }
+            StopCoroutine(soundCo);
+            dialogueProgressSymbolAnimator.SetTrigger("FadeIn");
             while (!progress) yield return null;
+            dialogueProgressSymbolAnimator.SetTrigger("FadeOut");
             progress = false;
             display.text = "";
             yield return new WaitForSeconds(dialogue.LineDelay);
+        }
+    }
+
+    private IEnumerator SoundCo(Vector2 pitchRange)
+    {
+        while(true) 
+        {
+            audioSource.pitch = Random.Range(pitchRange.x, pitchRange.y);
+            audioSource.PlayOneShot(charSounds[Random.Range(0, charSounds.Count)]);
+            yield return new WaitForSeconds(charSoundDelay);
         }
     }
 
