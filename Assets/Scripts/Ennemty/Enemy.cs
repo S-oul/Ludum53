@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
         float x = Random.Range(-7.5f,7.5f);
         float y = Random.Range(-.1625f, 0) - 3f;
         //print(x + " // " + y);
-        _goingto = true;
+        //_goingto = true;
         Vector3 pos = new(x,y);
         return pos;
     }
