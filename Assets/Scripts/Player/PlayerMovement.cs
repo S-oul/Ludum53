@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] Camera _cam; 
     [SerializeField] Transform _interactPos;
+    [SerializeField] Transform _visorpos;
 
     #endregion
     [Space]
@@ -22,10 +23,16 @@ public class PlayerMovement : MonoBehaviour
     [Space]
     [SerializeField] private float _walkSpeed = 10;
     [SerializeField] private float _jumpForce = 5;
+    [Tooltip("En FRAME")]
+    [SerializeField] float _timeToShoot = 15;
+    [SerializeField] float _shootDist = 2;
+    [SerializeField] float _reloadTime = 4;
+
+    float _shootTime = 0;
 
 
-    
 
+    private bool _isReloading = false;
     private bool _isLeft;
     private Rigidbody2D _rb;
     #endregion
@@ -48,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _cam = Camera.main;
+
+
+        _shootTime = _timeToShoot;
     }
 
     void Update()
@@ -139,6 +149,26 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButton(0) && _isReloading == false)
+        {
+            //Debug.DrawRay(transform.position, (_visorpos.position - _interactPos.position).normalized * _shootDist, Color.magenta);
+
+            _shootTime -= 1;
+            _cam.GetComponent<CameraZoom>().NewSize(_cam.orthographicSize - .025f);
+
+            if (_shootTime < 1)
+            {
+                Shoot();
+                _cam.GetComponent<CameraZoom>().NewSize(5f);
+                _shootTime = _timeToShoot;
+            }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _cam.GetComponent<CameraZoom>().NewSize(5f);
+            _shootTime = _timeToShoot;
+        }
+
         #region Debug
         if (_debug)
         {
@@ -158,6 +188,31 @@ public class PlayerMovement : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         #endregion
+    }
+
+    void Shoot()
+    {
+        _isReloading = true;
+        StartCoroutine(Reload(_reloadTime));
+        print("Shooting");
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (_visorpos.position - _interactPos.position).normalized,_shootDist);
+        if(hit.collider != null)
+        {
+
+            print(hit.collider.name);   
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                print("HIT !");
+                //_cam.GetComponent<CameraZoom>().Shake(.1f, 1f);
+                hit.transform.GetComponent<Enemy>().TakeDamage(999);
+            }
+        }
+       
+    }
+    IEnumerator Reload(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _isReloading = false;
     }
 
     private RaycastHit2D Raycaster()
