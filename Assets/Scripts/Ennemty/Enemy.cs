@@ -1,7 +1,9 @@
 using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _speed = 150;
     [SerializeField] float _crawlingSpeed = 100;
     [SerializeField] float _attackPlayerSpeed = 250;
+
+    [SerializeField] float _timetoKill = 2;
 
     public float _speedlightMultiplier;
 
@@ -180,13 +184,21 @@ public class Enemy : MonoBehaviour
             _rb.velocity = Time.deltaTime * _attackPlayerSpeed * _Dir;
 
             float Dist = Vector2.Distance(transform.position, _player.transform.position);
-            _spriteRenderer.color = new Color(255,255,255,Dist/3);
+            _spriteRenderer.color = new Color(0,0,0,1-Dist/3);
             if(Dist < .3f)
             {
-                _spriteRenderer.color = new Color(0,0,0,Dist/3f);
+                _timetoKill -= Time.deltaTime;
+                if(_timetoKill < 0 )
+                {
+                    _spriteRenderer.color = new Color(0,0,0,1);
+                    StartCoroutine(_player.PlayerDead());
+                }
             }
+            else
+            {
 
+            }
         }
-    }
 
+    }
 }
