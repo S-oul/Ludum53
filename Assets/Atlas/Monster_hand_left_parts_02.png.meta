@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c98705823af54e43874ccc3e4cb34b2
+guid: ce2041feafe511c448f8201c8d01c3ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -107,106 +107,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Doigt+paume_monstre_main_gauche_03
+      name: Monster_left_hand_finger_03+palm
       rect:
         serializedVersion: 2
-        x: 177
-        y: 690
-        width: 157
-        height: 180
+        x: 211
+        y: 660
+        width: 183
+        height: 195
       alignment: 9
-      pivot: {x: 0.8561559, y: 0.9051917}
+      pivot: {x: 0.64816934, y: 0.7143708}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a8c7d6f9c5c9044a891e62e4ce8f739
-      internalID: -586612513
+      spriteID: c4324ca3a0059f04fb440120531f697b
+      internalID: -304755624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Poign\xE9e+coude_monstre_main_gauche"
+      name: Monster_left_hand_arm_02
       rect:
         serializedVersion: 2
-        x: 627
-        y: 634
-        width: 226
-        height: 209
+        x: 648
+        y: 606
+        width: 265
+        height: 165
       alignment: 9
-      pivot: {x: 0.112737335, y: 0.11031827}
+      pivot: {x: 0.11203383, y: 0.47945815}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9227f755f84b5084b8eed14825071664
-      internalID: 1886569431
+      spriteID: 3b3047cade912714891f6f7091bb899d
+      internalID: -1621454405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doigt_monstre_main_gauche_02
+      name: Monster_left_hand_finger_02
       rect:
         serializedVersion: 2
-        x: 390
-        y: 459
-        width: 97
-        height: 222
+        x: 423
+        y: 455
+        width: 100
+        height: 170
       alignment: 9
-      pivot: {x: 0.42481035, y: 0.57118237}
+      pivot: {x: 0.47740418, y: 0.8057082}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8c1da319f42e724093d76d10f66bd87
-      internalID: 1390419719
+      spriteID: 154dfb95707b59b4e833ad8b1ea092c4
+      internalID: -375264435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doigt_monstre_main_gauche_01
+      name: Monster_left_hand_finger_01
       rect:
         serializedVersion: 2
-        x: 161
-        y: 269
-        width: 125
-        height: 134
+        x: 162
+        y: 377
+        width: 147
+        height: 140
       alignment: 9
-      pivot: {x: 0.7139414, y: 0.7902866}
+      pivot: {x: 0.9150258, y: 0.8631472}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb776fba1cd5e024891723cb5bafb461
-      internalID: -1206595064
+      spriteID: 6744ca79575acb049a33e6b533be1f7b
+      internalID: 549299421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bras_monstre_main_gauche
+      name: Monster_left_hand_arm_01
       rect:
         serializedVersion: 2
-        x: 472
-        y: 156
-        width: 526
-        height: 220
+        x: 454
+        y: 78
+        width: 401
+        height: 317
       alignment: 9
-      pivot: {x: 0.035493392, y: 0.36739188}
+      pivot: {x: 0.066114925, y: 0.3253633}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd71650bdada8734893879beb97925c9
-      internalID: 896155517
+      spriteID: 5e10874aac547234097c2d038cda0f94
+      internalID: 1714434235
       vertices: []
       indices: 
       edges: []
@@ -222,15 +222,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bras_monstre_main_gauche: 896155517
-      Doigt+paume_monstre_main_gauche_03: -586612513
-      Doigt_monstre_main_gauche_01: -1206595064
-      Doigt_monstre_main_gauche_02: 1390419719
-      Monster_left_hand_parts_1: 962815686
-      Monster_left_hand_parts_4: -1548920306
-      Monster_left_hand_parts_5: 266150816
-      Monster_left_hand_parts_8: -688886421
-      "Poign\xE9e+coude_monstre_main_gauche": 1886569431
+      Monster_hand_left_parts_02_1: 1966423871
+      Monster_hand_left_parts_02_2: 387569418
+      Monster_hand_left_parts_02_4: -41076216
+      Monster_hand_left_parts_02_5: 1668964700
+      Monster_hand_left_parts_02_6: -1846252723
+      Monster_left_hand_arm_01: 1714434235
+      Monster_left_hand_arm_02: -1621454405
+      Monster_left_hand_finger_01: 549299421
+      Monster_left_hand_finger_02: -375264435
+      Monster_left_hand_finger_03+palm: -304755624
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
