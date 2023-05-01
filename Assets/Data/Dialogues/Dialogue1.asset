@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a764a587442434591d3aae3fda2e5f, type: 3}
+  m_Name: Dialogue1
+  m_EditorClassIdentifier: 
+  lineDelay: 0.5
+  charDelay: 0.03
+  pitchRange: {x: 0.9, y: 1.1}
+  lines:
+  - "Hey. Wake up. It\u2019s time for you to go."
+  - What, forgot where you put your tongue, already ?
+  - "Ah yes\u2026 Am sorry, I forgot. Well, remember, tonight you need to go to Rattles
+    Camp. You got some deliveries to do.  Take this UV flashlight. It might come
+    in handy. Mange it well, and it should avoid you any trouble. Remember to keep
+    the engine powered up if you want to move on."
+  - "Just be careful with the surface. We still don\u2019t know how they act. Fly
+    over it, all we go fine. But here\u2019s some bullets, in case if the UV lights
+    are not enough."
+  - And mate, be careful out there.
+  portrait: {fileID: 0}
