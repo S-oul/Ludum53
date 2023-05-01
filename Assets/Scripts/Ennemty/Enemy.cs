@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     [Space]
     [Header("Modifiers")]
     [Space]
-    [SerializeField] float _hp = 1;
+    [SerializeField] float _hp = 200;
     [SerializeField] float _speed = 150;
     [SerializeField] float _crawlingSpeed = 100;
     [SerializeField] float _attackPlayerSpeed = 250;
@@ -46,12 +46,22 @@ public class Enemy : MonoBehaviour
 
 
     //LIFE DASH TRAIL ELSE;
+    public void TakeDamage(float toRemove)
+    {
+        _hp -= toRemove;
+        if( _hp < 0 )
+        {
 
+
+
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _lr = GetComponent<TrailRenderer>();
-        _lr.widthCurve = _linethick;
+        /*_lr = GetComponent<TrailRenderer>();
+        _lr.widthCurve = _linethick;*/
 
         _boxShip = _ship.transform.GetChild(0).GetComponent<BoxCollider2D>();
 
