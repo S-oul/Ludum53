@@ -28,8 +28,9 @@ public class Bullets : MonoBehaviour
             mousepos.z = transform.position.z;
             float Dist = Vector3.Distance(transform.position, mousepos);
             //print(Dist);
-            if(Dist < 0.5f) 
+            if(Dist < 0.4f) 
             {
+                _player.GetComponent<PlayerMovement>()._animator.SetBool("GunReload", true);
                 _isOk = true;
                 _player.CanShoot = false;
             }

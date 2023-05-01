@@ -12,22 +12,21 @@ public class Lever : MonoBehaviour
     [SerializeField] int MinAngle = -67;
     public Collider2D _col;
     public List<GameObject> Lights;
+    Animator _animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _animator = GetComponentInChildren<Animator>();
     }
     public bool Switch()
     {
         switch (_isOn)
         {
             case true:
-                transform.eulerAngles = new Vector3(0, 0, 30);
                 _isOn = false; 
                 break;
             case false:
-                transform.eulerAngles = new Vector3(0, 0, -30);
                 _isOn = true;
                 break;
         }
@@ -42,6 +41,24 @@ public class Lever : MonoBehaviour
 
         if(_isOn)
         {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                _animator.SetTrigger("Left");
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _animator.SetTrigger("Right");
+
+            }
+            if (Input.GetKeyUp(KeyCode.D))
+            {
+                _animator.SetTrigger("Idle");
+            }
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                _animator.SetTrigger("Idle");
+
+            }
             if (Input.GetKey(KeyCode.D))
             {
                 foreach (GameObject obj in Lights)
