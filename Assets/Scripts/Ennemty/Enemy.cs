@@ -67,6 +67,8 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         /*_lr = GetComponent<TrailRenderer>();
         _lr.widthCurve = _linethick;*/
+        if(_ship == null ) { _ship = GameObject.Find("Plateform"); }
+        if(_player == null ) { _player = GameObject.Find("Chara"); }
         _spriteRenderer = Camera.main.GetComponent<CameraZoom>()._spriteRenderer;
         _boxShip = _ship.transform.GetChild(0).GetComponent<BoxCollider2D>();
 
@@ -78,7 +80,7 @@ public class Enemy : MonoBehaviour
         float x = Random.Range(-7.5f,7.5f);
         float y = Random.Range(-.1625f, 0) - 3f;
         //print(x + " // " + y);
-        _goingto = true;
+        //_goingto = true;
         Vector3 pos = new(x,y);
         return pos;
     }

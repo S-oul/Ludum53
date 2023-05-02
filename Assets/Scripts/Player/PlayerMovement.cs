@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!_asCrate)
