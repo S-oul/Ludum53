@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] BulletsManager _bulletsManager;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _animation;
-    Animator _animator;
+    public Animator _animator;
 
     #endregion
     [Space]
@@ -79,7 +79,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Respawn"))
+        {
+            StartCoroutine(PlayerDead());
+        }
+    }
     void Update()
     {
         if (!_isLevering)
@@ -120,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!_asCrate)
@@ -147,20 +153,45 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+        if (_isLevering)
+        {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                _animator.SetTrigger("LeverRight");
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _animator.SetTrigger("LeverLeft");
+
+            }
+        }
+        if(_isPumping)
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                _animator.SetTrigger("PumpDown");
+            }
+            if(Input.GetKeyDown(KeyCode.W)) 
+            {
+                _animator.SetTrigger("PumpUp");
+
+            }
+        }
         if (Input.GetKeyDown(KeyCode.F)) 
         {
             if (_isLevering)
             {
                 _isLevering = false;
+                _animator.SetTrigger("LeverExit");
                 _lever.Switch();
-                _animator.SetTrigger("LeverEnter");
                 _cam.GetComponent<CameraZoom>().NewSize(5f);
                 return;
             }else if (_isPumping)
             {
                 _isPumping = false;
                 _pump.Switch();
-                _animator.SetTrigger("PumpEnter");
+                _animator.SetTrigger("PumpExit");
+
                 _cam.GetComponent<CameraZoom>().NewSize(5f);
             }
             else if(!_asCrate)
@@ -173,11 +204,13 @@ public class PlayerMovement : MonoBehaviour
                         case "Pump":
                             Debug.Log(hit.collider.name);
                             if (_pump == null) { _pump = hit.collider.GetComponent<LeverPump>(); }
+                            _animator.SetTrigger("PumpEnter");
                             _isPumping = _pump.Switch();
                             _cam.GetComponent<CameraZoom>().NewSize(2.5f);
                             break;
                         case "Lever":
                             if (_lever == null) { _lever = hit.collider.GetComponent<Lever>(); }
+                            _animator.SetTrigger("LeverEnter");
                             _isLevering = _lever.Switch();
                             _cam.GetComponent<CameraZoom>().NewSize(7.5f);
                             break;
@@ -186,10 +219,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if(Input.GetMouseButtonDown(0))
+        {
+            _animator.SetBool("GunEnter", true);
+        }
         if (Input.GetMouseButton(0) && _isReloading == false && CanShoot)
         {
             //Debug.DrawRay(transform.position, (_visorpos.position - _interactPos.position).normalized * _shootDist, Color.magenta);
-
             _shootTime -= 1;
             _cam.GetComponent<CameraZoom>().NewSize(_cam.orthographicSize - .015f);
 
@@ -209,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
                         {
                             //print("OUI");
                             _barrel.changeholed(t.name);
-                            t.GetComponent<SpriteRenderer>().color = Color.black;
+                            t.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
                             break;
                         }
                     }
@@ -228,6 +264,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+            _animator.SetBool("GunExit", true);
             _cam.GetComponent<CameraZoom>().NewSize(5f);
             _shootTime = _timeToShoot;
         }
@@ -270,6 +307,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
        
+    }
+    public IEnumerator PlayerDead()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     IEnumerator Reload(float time)
     {
