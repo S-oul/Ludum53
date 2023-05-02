@@ -16,13 +16,16 @@ MonoBehaviour:
   charDelay: 0.03
   pitchRange: {x: 0.9, y: 1.1}
   lines:
-  - "Finally ! Goddamn. Been waiting those for a while. It\u2019s been a month since
-    the last porter left the refuge."
+  - Holy hell, are you alright ?
+  - Here, let s help you unpack...
   - ...
-  - "Ah, I see who you are. Everybody heard from you. Well, the man you\u2019re looking
-    for is one station away, at Highland Crossroads. He\u2019s the radio man now.
-    Unfortunately, our radio broke 2 days ago, and the cable to there as fallen into
-    the mist. "
-  - "You\u2019re sure you want to get there ?"
-  - "Alrigh, here\u2019s some more bullets. Be careful to not topple over."
-  portrait: {fileID: 0}
+  - What, you only have <color=red><b>this one cargo ?<b></color>
+  - ...
+  - Wait... you did all this for a <b><color=red>box</color> of <color=#bd523c>chocolates</color><b>
+    ?
+  - Well... I know who this is from. His wife will be delighted, that's for sure...
+    I'll make sure that she receives it.
+  - This guy, really...
+  - And you... a fine porter you are ! You should rest now. We've prepared you some
+    quarters. Bet you had a pretty long day, and some stories to tell !
+  portrait: {fileID: 21300000, guid: 517ab2136ec74be4389d5c512789c82f, type: 3}

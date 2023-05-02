@@ -16,15 +16,19 @@ MonoBehaviour:
   charDelay: 0.03
   pitchRange: {x: 0.9, y: 1.1}
   lines:
-  - "Thank god you\u2019re here ! We were running out of food for 3 days now. It\u2019s
-    a bless to have you here. I bet you saw a lot of stuff, before getting here.
-    No one should endure such torments. "
+  - Welcome to Rattlescamp, pal  !
+  - So, you're the guy they sent to collect our crates ?
   - ...
-  - "Ah yes, you\u2019re The mute. We heard you were looking for your father. Well,
-    he came here 6 months ago, looking for you and your sister. She didn\u2019t made
-    it, I\u2019m sorry, got caught into the darkness. "
-  - "Anyways, we got some packages for you to carry on to Theta Station, as well
-    as a gift for my wife, didn\u2019t saw her since months. Can you deliver these,
-    if you come by to Highland Crossroads, two shelters away ?  "
-  - "Until then, get some sleep, you\u2019ll need it."
-  portrait: {fileID: 0}
+  - Oh, right, you're the mute one !
+  - In any case, here's a refill of ammo for you. Bet you'll need it.
+  - So, you're off to deposit this cargo to next camp over.
+  - 'Also... '
+  - It's a bit embarassing to ask that, but...
+  - I was hoping you'd deliver <color=red><b>this additional package</b></color>
+    to someone <color=red><b>I deeply care about</b></color>, a little further along
+    the Line.
+  - I left a note in it. The Quartermaster there knows me, he'll know who's the recipient.
+  - I'm not forcing you, you could just deposit it next stop and someone might take
+    the job eventually...
+  - Well, anyway... I won't keep you further. Good luck out here, pal !
+  portrait: {fileID: 21300000, guid: 6aea6a4d490c2c34199cc61e0a74b6d8, type: 3}

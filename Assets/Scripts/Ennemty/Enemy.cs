@@ -21,10 +21,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _hp = 200;
     [SerializeField] float _speed = 150;
     [SerializeField] float _crawlingSpeed = 100;
-    [SerializeField] float _attackPlayerSpeed = 250;
+    [SerializeField] float _chasePlayerSpeed = 250;
 
     [SerializeField] float _timetoKill = 2;
+    [SerializeField] float _elapsedTime;
 
+    [SerializeField] Vector2 fadeRandomness;
     public float _speedlightMultiplier;
 
     [Space]
@@ -35,6 +37,11 @@ public class Enemy : MonoBehaviour
 
 
     BoxCollider2D _boxShip;
+
+    private bool _facingRight;
+    private bool _playerKilled;
+    private bool _litUp;
+    [SerializeField] private List<UVLight> _currentLights;
 
     Vector3 _Dir;
     Vector3 _attackhereBounds;
@@ -88,27 +95,44 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print(collision.tag + " in Enemy");
         if (collision.CompareTag("lightMask"))
         {
             //print("j'y suis"); 
+            _litUp = true;
+            _currentLights.Add(collision.transform.parent.GetComponent<UVLight>());
             _speedlightMultiplier = .25f;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        print(collision.tag + " out of Enemy");
         if (collision.CompareTag("lightMask"))
         {
             //print("j'y fut");
+            _litUp = false;
+            _currentLights.Remove(collision.transform.parent.GetComponent<UVLight>());
             _speedlightMultiplier = 1;
         }
     }
+
     void Update()
     {
+        if(_litUp)
+        {
+            print("lit");
+            foreach (UVLight light in _currentLights)
+            {
+                print("ouille");
+                TakeDamage(light.FocusDamage * Time.deltaTime);   
+            }
+        }
         //print(_ship.transform.position);
         if( _goingto )
         {
             _attackhereShip = _attackhereBounds + _ship.transform.position;
             _Dir = (_attackhereShip - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(_Dir);
             _rb.velocity = _speed * Time.deltaTime * _speedlightMultiplier * _Dir;
         
 
@@ -184,23 +208,37 @@ public class Enemy : MonoBehaviour
         if (_goPlayer)
         {
             _Dir = (_player.transform.position - transform.position).normalized;
-            _rb.velocity = Time.deltaTime * _attackPlayerSpeed * _Dir;
+            //if(_Dir.x < 0 && !_facingRight) 
+            //{ 
+            //    _facingRight = true; 
+            //    transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z); 
+            //}
+            //else if(_Dir.x > 0 && _facingRight)
+            //{
+            //    _facingRight = false;
+            //    transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            //}
+            _rb.velocity = Time.deltaTime * _chasePlayerSpeed * _Dir;
 
             float Dist = Vector2.Distance(transform.position, _player.transform.position);
-            _spriteRenderer.color = new Color(0,0,0,1-Dist/3);
-            if(Dist < .3f)
+            //print(Dist);
+            _spriteRenderer.color = new Color(0, 0, 0, _elapsedTime / _timetoKill);
+            if (Dist < 2f)
             {
-                _timetoKill -= Time.deltaTime;
-                if(_timetoKill < 0 )
+                _elapsedTime += Time.deltaTime;
+                _spriteRenderer.color += new Color(0, 0, 0, Random.Range(fadeRandomness.x, fadeRandomness.y));
+                if(_elapsedTime > _timetoKill && !_playerKilled)
                 {
+                    _playerKilled = true;
                     _spriteRenderer.color = new Color(0,0,0,1);
                     StartCoroutine(_player.GetComponent<PlayerMovement>().PlayerDead());
                 }
             }
-            else
+            else if (!_playerKilled)
             {
-
+                _elapsedTime = Mathf.Clamp(_elapsedTime - Time.deltaTime, 0, 1);
             }
+
         }
 
     }

@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - lightMask
   - Pump
+  - Plateforme
   layers:
   - Default
   - TransparentFX

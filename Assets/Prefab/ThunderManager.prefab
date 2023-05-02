@@ -68,7 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f5147a553ec7b42bccec5aff632d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenZeus: 10
+  timeBetweenZeus: {x: 5, y: 7.5}
+  thunderDuration: 1.5
+  audioPitchRange: {x: 0.9, y: 1.1}
   ThunderImage: {fileID: 4315838807429041065}
 --- !u!82 &4706964359289059663
 AudioSource:
@@ -81,10 +83,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c8f74cfda42e986478e89f9c3ab6253f, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.89
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

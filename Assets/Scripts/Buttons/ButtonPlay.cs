@@ -8,6 +8,6 @@ public class ButtonPlay : Button
     public override void OnClick()
     {
         base.OnClick();
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Cutscene1");
     }
 }

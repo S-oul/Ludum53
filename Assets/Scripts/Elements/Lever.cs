@@ -8,8 +8,9 @@ public class Lever : MonoBehaviour
 {
     bool _isOn = false;
 
-    [SerializeField] int Maxangle = 180;
-    [SerializeField] int MinAngle = -67;
+    //[SerializeField] int Maxangle = 180;
+    //[SerializeField] int MinAngle = -67;
+    [SerializeField] private float turnSpeed;
     public Collider2D _col;
     public List<GameObject> Lights;
     Animator _animator;
@@ -64,17 +65,17 @@ public class Lever : MonoBehaviour
                 foreach (GameObject obj in Lights)
                 {
                     float angle = obj.transform.eulerAngles.z;
-                    if (angle > Maxangle+20f) { angle -= 360; }
-                    if (angle < Maxangle)
-                    {
-                        obj.transform.eulerAngles += new Vector3(0, 0, 1);
-                        print(angle);
+                    //if (angle > Maxangle+20f) { angle -= 360; }
+                    //if (angle < Maxangle)
+                    //{
+                        obj.transform.eulerAngles += new Vector3(0, 0, 1 * turnSpeed * Time.deltaTime);
+                    //    print(angle);
 
-                    }
-                    else
-                    {
-                        obj.transform.eulerAngles = new Vector3(0, 0, Maxangle);
-                    }
+                    //}
+                    //else
+                    //{
+                    //   obj.transform.eulerAngles = new Vector3(0, 0, Maxangle);
+                    //}
 
                 }
             }
@@ -83,17 +84,34 @@ public class Lever : MonoBehaviour
                 foreach (GameObject obj in Lights)
                 {
                     float angle = obj.transform.eulerAngles.z;
-                    if (angle > Maxangle) { angle -= 360;}
-                    if (angle > MinAngle)
-                    {
-                        print(angle);
-                        obj.transform.eulerAngles += new Vector3(0, 0, -1);
-                    }
-                    else
-                    {
-                        obj.transform.eulerAngles = new Vector3(0, 0, MinAngle);
-                    }
+                    //if (angle > Maxangle) { angle -= 360;}
+                    //if (angle > MinAngle)
+                    //{
+                    //    print(angle);
+                        obj.transform.eulerAngles += new Vector3(0, 0, -1 * turnSpeed * Time.deltaTime);
+                    //}
+                    //else
+                    //{
+                    //    obj.transform.eulerAngles = new Vector3(0, 0, MinAngle);
+                    //}
 
+                }
+            }
+            //FocusLight
+            if (Input.GetMouseButtonDown(1))
+            {
+                foreach (GameObject light in Lights)
+                {
+                    UVLight uv = light.GetComponent<UVLight>();
+                    uv.SetStatus(UVLight.LightStatus.focused);
+                }
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                foreach (GameObject light in Lights)
+                {
+                    UVLight uv = light.GetComponent<UVLight>();
+                    uv.SetStatus(UVLight.LightStatus.regular);
                 }
             }
 

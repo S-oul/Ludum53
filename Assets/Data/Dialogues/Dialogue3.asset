@@ -16,13 +16,18 @@ MonoBehaviour:
   charDelay: 0.03
   pitchRange: {x: 0.9, y: 1.1}
   lines:
-  - "Finally ! Goddamn. Been waiting those for a while. It\u2019s been a month since
-    the last porter left the refuge."
+  - Finally ! Took you long enough.
+  - We've been waiting for this food for weeks !
   - ...
-  - "Ah, I see who you are. Everybody heard from you. Well, the man you\u2019re looking
-    for is one station away, at Highland Crossroads. He\u2019s the radio man now.
-    Unfortunately, our radio broke 2 days ago, and the cable to there as fallen into
-    the mist. "
-  - "You\u2019re sure you want to get there ?"
-  - "Alrigh, here\u2019s some more bullets. Be careful to not topple over."
-  portrait: {fileID: 0}
+  - Ah, I see who you are. Well, you deserve some rest, that's for sure. We'll spare
+    you a room.
+  - ...What ? You've got another errand ?
+  - You madlad, have you seen the storm ? The creatures are going to be agitated,
+    you'd be crazy to go back out there !
+  - ...
+  - Well, I mean, who am I to stop you, right ?... We got our food, my concern ends
+    here.
+  - At least, take some more bullets. Not sure it'll do much help, but it'll keep
+    my conscience at ease.
+  - Do try to come back from the mist, will you ?
+  portrait: {fileID: 21300000, guid: 517ab2136ec74be4389d5c512789c82f, type: 3}

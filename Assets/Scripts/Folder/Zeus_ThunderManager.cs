@@ -5,36 +5,28 @@ using UnityEngine;
 
 public class Zeus_ThunderManager : MonoBehaviour
 {
-    public float timeBetweenZeus = 10;
-    public GameObject ThunderImage;
-    private float randomizer = 0;
-    private AudioSource audioData;
+    [SerializeField] private Vector2 timeBetweenZeus;
+    [SerializeField] private float thunderDuration;
+    [SerializeField] private Vector2 audioPitchRange;
+    [SerializeField] private GameObject ThunderImage;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         ThunderImage.SetActive(false);
         StartCoroutine(Thundering());
-        audioData = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown("Fire1")) { }
+        audioSource = GetComponent<AudioSource>();
     }
 
     IEnumerator Thundering()
     {
-        randomizer = Random.Range(1, 6);
-        yield return new WaitForSeconds(timeBetweenZeus);
-        if (randomizer == 1)
-        {
-            ThunderImage.SetActive(true);
-            audioData.Play(0);
-        }
-        yield return new WaitForSeconds(1f);
-        Debug.Log(randomizer);
+        yield return new WaitForSeconds(Random.Range(timeBetweenZeus.x, timeBetweenZeus.y));
+        ThunderImage.SetActive(true);
+        audioSource.Stop();
+        audioSource.pitch = Random.Range(audioPitchRange.x, audioPitchRange.y);
+        audioSource.Play(0);
+        yield return new WaitForSeconds(thunderDuration);
         ThunderImage.SetActive(false);
         StartCoroutine(Thundering());
     }

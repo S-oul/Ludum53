@@ -43,7 +43,14 @@ public class PlayerMovement : MonoBehaviour
     private bool _isReloading = false;
     private bool _isLeft;
     private Rigidbody2D _rb;
+    private Collider2D _collider;
     #endregion
+
+    [Header("Camera")]
+    [SerializeField] private float _baseCameraSize;
+    [SerializeField] private float _pumpCameraSize;
+    [SerializeField] private float _leverCameraSize;
+    [SerializeField] private float _shootingCameraSize;
 
     private LeverPump _pump;
     private bool _isPumping;
@@ -54,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
     private bool _asCrate = false;
     private Crate _crate;
 
+    private Collider2D _lastTriggerHit;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource _gunSource;
 
     [Space(100)]
     [Header("Debug")]
@@ -75,16 +86,18 @@ public class PlayerMovement : MonoBehaviour
         {
             GameObject go = Instantiate(_bulletPrefab);
             go.transform.parent = Camera.main.transform;
-            go.transform.localPosition = new Vector3(7 - (i * .7f), -4.10f, 1);
+            go.transform.localPosition = new Vector3(8 - (i * .7f), -6f, 1);
         }
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print("Player x " + collision.tag);
         if (collision.CompareTag("Respawn"))
         {
             StartCoroutine(PlayerDead());
         }
+        else _lastTriggerHit = collision;
     }
     void Update()
     {
@@ -131,18 +144,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!_asCrate)
             {
-                RaycastHit2D hit = Raycaster();
-                if (hit.collider != null)
+                switch (_lastTriggerHit.tag)
                 {
-                    Debug.Log(hit.transform.name);
-                    switch (hit.collider.tag)
-                    {
-                        case "Crate":
-                            _crate = hit.collider.GetComponent<Crate>();
-                            _crate.interact(_interactPos);
-                            _asCrate = true;
-                            break;
-                    }
+                    case "Crate":
+                        _crate = _lastTriggerHit.GetComponent<Crate>();
+                        _crate.interact(_interactPos);
+                        _asCrate = true;
+                        break;
                 }
             }
             else
@@ -155,15 +163,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (_isLevering)
         {
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                _animator.SetTrigger("LeverRight");
-            }
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                _animator.SetTrigger("LeverLeft");
-
-            }
+            if (Input.GetKeyUp(KeyCode.D)) _animator.SetBool("LeverRight", false);
+            if (Input.GetKeyUp(KeyCode.Q))_animator.SetBool("LeverLeft", false);
+            if (Input.GetKeyDown(KeyCode.D)) _animator.SetBool("LeverRight", true);
+            if (Input.GetKeyDown(KeyCode.Q)) _animator.SetBool("LeverLeft", true);
         }
         if(_isPumping)
         {
@@ -184,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
                 _isLevering = false;
                 _animator.SetTrigger("LeverExit");
                 _lever.Switch();
-                _cam.GetComponent<CameraZoom>().NewSize(5f);
+                _cam.GetComponent<CameraZoom>().NewSize(_baseCameraSize);
                 return;
             }else if (_isPumping)
             {
@@ -192,30 +195,27 @@ public class PlayerMovement : MonoBehaviour
                 _pump.Switch();
                 _animator.SetTrigger("PumpExit");
 
-                _cam.GetComponent<CameraZoom>().NewSize(5f);
+                _cam.GetComponent<CameraZoom>().NewSize(_baseCameraSize);
             }
             else if(!_asCrate)
             {
-                RaycastHit2D hit = Raycaster();
-                if (hit.collider != null)
+                Debug.Log(_lastTriggerHit.name);
+                switch (_lastTriggerHit.tag)
                 {
-                    switch (hit.collider.tag)
-                    {
-                        case "Pump":
-                            Debug.Log(hit.collider.name);
-                            if (_pump == null) { _pump = hit.collider.GetComponent<LeverPump>(); }
-                            _animator.SetTrigger("PumpEnter");
-                            _isPumping = _pump.Switch();
-                            _cam.GetComponent<CameraZoom>().NewSize(2.5f);
-                            break;
-                        case "Lever":
-                            if (_lever == null) { _lever = hit.collider.GetComponent<Lever>(); }
-                            _animator.SetTrigger("LeverEnter");
-                            _isLevering = _lever.Switch();
-                            _cam.GetComponent<CameraZoom>().NewSize(7.5f);
-                            break;
-                    }
+                    case "Pump":
+                        if (_pump == null) { _pump = _lastTriggerHit.GetComponent<LeverPump>(); }
+                        _animator.SetTrigger("PumpEnter");
+                        _isPumping = _pump.Switch();
+                        _cam.GetComponent<CameraZoom>().NewSize(_pumpCameraSize);
+                        break;
+                    case "Lever":
+                        if (_lever == null) { _lever = _lastTriggerHit.GetComponent<Lever>(); }
+                        _animator.SetTrigger("LeverEnter");
+                        _isLevering = _lever.Switch();
+                        _cam.GetComponent<CameraZoom>().NewSize(_leverCameraSize);
+                        break;
                 }
+                
             }
         }
 
@@ -223,19 +223,19 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("GunEnter", true);
         }
-        if (Input.GetMouseButton(0) && _isReloading == false && CanShoot)
+        if (Input.GetMouseButtonUp(0) && _isReloading == false && CanShoot)
         {
             //Debug.DrawRay(transform.position, (_visorpos.position - _interactPos.position).normalized * _shootDist, Color.magenta);
-            _shootTime -= 1;
-            _cam.GetComponent<CameraZoom>().NewSize(_cam.orthographicSize - .015f);
+            //_shootTime -= 1;
+            //_cam.GetComponent<CameraZoom>().NewSize(_shootingCameraSize);
 
-            if (_shootTime == 0)
-            {
+            //if (_shootTime == 0)
+            //{
                 if(_bulletCount > 0)
                 {
                     Shoot();
                     print(_bulletCount);
-                    //PLAYSOUND HERE
+                    _gunSource.Play();
                     _bulletCount--;
                     string str;
                     foreach(Transform t in _barrel._holes)
@@ -257,16 +257,16 @@ public class PlayerMovement : MonoBehaviour
                     //PLAYSOUND HERE
                 }
 
-                _cam.GetComponent<CameraZoom>().NewSize(5f);
-                _shootTime = _timeToShoot;
+                //_cam.GetComponent<CameraZoom>().NewSize(_baseCameraSize);
+                //_shootTime = _timeToShoot;
 
-            }
+           //}
         }
         if (Input.GetMouseButtonUp(0))
         {
             _animator.SetBool("GunExit", true);
-            _cam.GetComponent<CameraZoom>().NewSize(5f);
-            _shootTime = _timeToShoot;
+            //_cam.GetComponent<CameraZoom>().NewSize(_baseCameraSize);
+            //_shootTime = _timeToShoot;
         }
 
         #region Debug
@@ -324,11 +324,11 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit;
         if (!_isLeft)
         {
-            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one, new CapsuleDirection2D(),0, Vector2.right, 3);
+            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one * 30, new CapsuleDirection2D(),0, Vector2.right, 3);
         }
         else
         {
-            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one, new CapsuleDirection2D(), 0, Vector2.left, 3);
+            hit = Physics2D.CapsuleCast(_interactPos.position, Vector2.one * 30, new CapsuleDirection2D(), 0, Vector2.left, 3);
 
         }
         return hit;

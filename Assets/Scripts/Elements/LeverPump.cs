@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeverPump : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class LeverPump : MonoBehaviour
 
     [SerializeField] float _timeBetweenPump;
 
+    [SerializeField] private Image _batteryFill;
     public Animator _animator;
 
     bool _isOn = false;
@@ -92,5 +94,6 @@ public class LeverPump : MonoBehaviour
             }
         }
         AddCharge(-Time.deltaTime/100 * _depletionFactor);
+        _batteryFill.fillAmount = _charge;
     }
 }
