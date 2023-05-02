@@ -18,6 +18,12 @@ public class DialogueHandler : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> charSounds;
 
+    [Header("Monitoring")]
+    private int currentLine;
+    public int CurrentLine => currentLine;
+
+    private Coroutine dialogueCo;
+    public bool IsPlaying => dialogueCo != null;
     private Controls controls;
     private bool progress;
 
@@ -30,6 +36,7 @@ public class DialogueHandler : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue, TMPro.TextMeshProUGUI display)
     {
+        currentLine = 0;
         this.display = display;
         StartDialogue(dialogue);
     }
@@ -37,7 +44,7 @@ public class DialogueHandler : MonoBehaviour
     {
         display.text = "";
         if(dialogue.Portrait != null) portraitFrame.sprite = dialogue.Portrait;
-        StartCoroutine(DialogueCo(dialogue));
+        dialogueCo = StartCoroutine(DialogueCo(dialogue));
     }
 
     private IEnumerator DialogueCo(Dialogue dialogue)
@@ -45,6 +52,8 @@ public class DialogueHandler : MonoBehaviour
         Queue<string> dialogueQueue = new Queue<string>(dialogue.Lines);
         while (dialogueQueue.Count > 0)
         {
+            currentLine++;
+            bool readingTag = false;
             Coroutine soundCo = StartCoroutine(SoundCo(dialogue.PitchRange));
             string line = forceUpperCase ? dialogueQueue.Dequeue().ToUpper() : dialogueQueue.Dequeue();
             foreach (char c in line)
@@ -56,7 +65,9 @@ public class DialogueHandler : MonoBehaviour
                     break;
                 }
                 display.text += c;
-                yield return new WaitForSeconds(dialogue.CharDelay);
+                if (c == '<') readingTag = true;
+                else if (c == '>') readingTag = false;
+                if(!readingTag) yield return new WaitForSeconds(dialogue.CharDelay);
             }
             StopCoroutine(soundCo);
             dialogueProgressSymbolAnimator.SetTrigger("FadeIn");
@@ -66,6 +77,7 @@ public class DialogueHandler : MonoBehaviour
             display.text = "";
             yield return new WaitForSeconds(dialogue.LineDelay);
         }
+        dialogueCo = null;
     }
 
     private IEnumerator SoundCo(Vector2 pitchRange)

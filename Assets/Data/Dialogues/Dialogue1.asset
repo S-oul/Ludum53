@@ -16,14 +16,24 @@ MonoBehaviour:
   charDelay: 0.03
   pitchRange: {x: 0.9, y: 1.1}
   lines:
-  - "Hey. Wake up. It\u2019s time for you to go."
-  - What, forgot where you put your tongue, already ?
-  - "Ah yes\u2026 Am sorry, I forgot. Well, remember, tonight you need to go to Rattles
-    Camp. You got some deliveries to do.  Take this UV flashlight. It might come
-    in handy. Mange it well, and it should avoid you any trouble. Remember to keep
-    the engine powered up if you want to move on."
-  - "Just be careful with the surface. We still don\u2019t know how they act. Fly
-    over it, all we go fine. But here\u2019s some bullets, in case if the UV lights
-    are not enough."
-  - And mate, be careful out there.
+  - Hey. Wake up, lad !
+  - "It\u2019s time for you to go."
+  - ...
+  - What, forgot your tongue ? You mute or somethin' ?
+  - "...Ah yes\u2026 sorry lad, forgot 'bout that."
+  - Well, remember, tonight we need you to Rattlescamp, next station over.
+  - Got some cargo to pick up there and deliver further along the way.
+  - You know the drill, but no harm in reminders, right ?
+  - Whatever's out there can only be seen in the <b><color=yellow>light</b></color>.
+  - Your boat's lamp can be rotated using the <b><color=yellow>lever</color></b>.
+  - If you're getting attacked, you can <b><color=yellow>focus</color></b> the light
+    to fight the creatures.
+  - The boat's battery can be recharged by using the <b><color=yellow>pump</color></b>.
+  - If it runs out, boat will slow down until it stops, so keep an eye on it !
+  - Finally, in case of emergency... well, you know how to use that thing.
+  - Bullets go in the chamber. Use them sparingly, as we don't have a heck of a lot
+    of them in stock anymore.
+  - And lad... I know this ain't your first run, but be careful out there, 'aight
+    ?
+  - Do come back to us in one piece.
   portrait: {fileID: 21300000, guid: 01f01e17687b08d4cbf3b71c78dac99d, type: 3}
