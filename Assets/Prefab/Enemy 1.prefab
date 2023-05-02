@@ -50,9 +50,9 @@ MonoBehaviour:
   _ship: {fileID: 0}
   _player: {fileID: 0}
   _hp: 1
-  _speed: 30
-  _crawlingSpeed: 20
-  _attackPlayerSpeed: 45
+  _speed: 50
+  _crawlingSpeed: 50
+  _attackPlayerSpeed: 50
   _timetoKill: 2
   _speedlightMultiplier: 1
   _linethick:

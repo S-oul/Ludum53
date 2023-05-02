@@ -67,6 +67,8 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         /*_lr = GetComponent<TrailRenderer>();
         _lr.widthCurve = _linethick;*/
+        if(_ship == null ) { _ship = GameObject.Find("Plateform"); }
+        if(_player == null ) { _player = GameObject.Find("Chara"); }
         _spriteRenderer = Camera.main.GetComponent<CameraZoom>()._spriteRenderer;
         _boxShip = _ship.transform.GetChild(0).GetComponent<BoxCollider2D>();
 
